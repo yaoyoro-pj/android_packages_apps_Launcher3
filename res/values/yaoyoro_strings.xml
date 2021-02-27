@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="yaoyoro_app_name" translatable="false">Runa</string>
     <string name="pref_tablet_overview_style_title">Force tablet style</string>
     <string name="pref_tablet_overview_style_summary">For all launcher elements. Not recommended...?</string>
@@ -7,4 +7,10 @@
     <!-- Task lock -->
     <string name="task_menu_item_unlock">Unlock</string>
     <string name="task_menu_item_lock">Lock</string>
+
+    <!-- Custom seekbar -->
+    <string name="custom_seekbar_value">Value: <xliff:g id="v">%s</xliff:g></string>
+    <string name="custom_seekbar_default_value">by default</string>
+    <string name="custom_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong tap to set</string>
+    <string name="custom_seekbar_default_value_is_set">Default value is set</string>
 </resources>
