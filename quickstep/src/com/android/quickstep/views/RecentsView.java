@@ -1566,25 +1566,6 @@ public abstract class RecentsView<ACTIVITY_TYPE extends StatefulActivity<STATE_T
     }
 
     @Override
-    protected void onEdgeAbsorbingScroll() {
-        vibrateForScroll();
-    }
-
-    @Override
-    protected void onScrollOverPageChanged() {
-        vibrateForScroll();
-    }
-
-    private void vibrateForScroll() {
-        long now = SystemClock.uptimeMillis();
-        if (now - mScrollLastHapticTimestamp > mScrollHapticMinGapMillis) {
-            mScrollLastHapticTimestamp = now;
-            VibratorWrapper.INSTANCE.get(mContext).vibrate(SCROLL_VIBRATION_PRIMITIVE,
-                    SCROLL_VIBRATION_PRIMITIVE_SCALE, SCROLL_VIBRATION_FALLBACK);
-        }
-    }
-
-    @Override
     protected void determineScrollingStart(MotionEvent ev, float touchSlopScale) {
         // Enables swiping to the left or right only if the task overlay is not modal.
         if (!isModal()) {

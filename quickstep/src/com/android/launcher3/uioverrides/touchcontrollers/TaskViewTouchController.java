@@ -371,11 +371,6 @@ public abstract class TaskViewTouchController<T extends BaseDraggingActivity>
         mCurrentAnimation.startWithVelocity(mActivity, goingToEnd,
                 velocity * orientationHandler.getSecondaryTranslationDirectionFactor(),
                 mEndDisplacement, animationDuration);
-        if (goingUp && goingToEnd && !mIsDismissHapticRunning) {
-            VibratorWrapper.INSTANCE.get(mActivity).vibrate(TASK_DISMISS_VIBRATION_PRIMITIVE,
-                    TASK_DISMISS_VIBRATION_PRIMITIVE_SCALE, TASK_DISMISS_VIBRATION_FALLBACK);
-            mIsDismissHapticRunning = true;
-        }
     }
 
     private void clearState() {

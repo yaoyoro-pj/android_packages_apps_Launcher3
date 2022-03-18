@@ -438,14 +438,7 @@ public class NoButtonQuickSwitchTouchController implements TouchController,
             nonOverviewAnim.setFloatValues(startProgress, endProgress);
             mNonOverviewAnim.dispatchOnStart();
         }
-        if (targetState == QUICK_SWITCH_FROM_HOME) {
-            // Navigating to quick switch, add scroll feedback since the first time is not
-            // considered a scroll by the RecentsView.
-            VibratorWrapper.INSTANCE.get(mLauncher).vibrate(
-                    RecentsView.SCROLL_VIBRATION_PRIMITIVE,
-                    RecentsView.SCROLL_VIBRATION_PRIMITIVE_SCALE,
-                    RecentsView.SCROLL_VIBRATION_FALLBACK);
-        } else {
+        if (targetState != QUICK_SWITCH_FROM_HOME) {
             InteractionJankMonitorWrapper.cancel(InteractionJankMonitorWrapper.CUJ_QUICK_SWITCH);
         }
 
