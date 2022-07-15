@@ -16,7 +16,8 @@
 
 <androidx.preference.PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:launcher="http://schemas.android.com/apk/res-auto">
+    xmlns:launcher="http://schemas.android.com/apk/res-auto"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.launcher3">
 
     <SwitchPreference
         android:defaultValue="false"
@@ -109,6 +110,24 @@
         android:title="@string/drawer_show_labels"
         android:defaultValue="true"
         android:persistent="true" />
+
+    <com.android.launcher3.settings.preferences.CustomSeekBarPreference
+        android:key="pref_app_drawer_opacity"
+        android:title="@string/background_opacity_title"
+        android:persistent="true"
+        android:max="100"
+        android:min="0"
+        settings:units="%"
+        android:defaultValue="100" />
+
+    <com.android.launcher3.settings.preferences.CustomSeekBarPreference
+        android:key="pref_recents_opacity"
+        android:title="@string/background_opacity_title"
+        android:persistent="true"
+        android:max="100"
+        android:min="0"
+        settings:units="%"
+        android:defaultValue="40" />
 
     <SwitchPreference
         android:key="pref_tablet_overview_style"

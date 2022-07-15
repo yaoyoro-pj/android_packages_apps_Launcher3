@@ -140,6 +140,8 @@ public final class Utilities {
 
     public static final String KEY_DT_GESTURE = "pref_dt_gesture";
     public static final String KEY_FORCE_MONOCHROME_ICONS = "pref_forced_monochrome_icons";
+    public static final String KEY_RECENTS_OPACITY = "pref_recents_opacity";
+    public static final String KEY_APP_DRAWER_OPACITY = "pref_app_drawer_opacity";
 
     public static final String GSA_PACKAGE = "com.google.android.googlequicksearchbox";
     public static final String CTS_PACKAGE = "com.akslabs.circletosearch";
@@ -866,5 +868,15 @@ public final class Utilities {
     public static boolean isLongPressToSearchEnabled(Context context) {
         return Settings.System.getInt(context.getContentResolver(),
                 Settings.System.NAVBAR_LONG_PRESS_GESTURE, 1) == 1;
+    }
+
+    public static int getRecentsOpacity(Context context) {
+        SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
+        return prefs.getInt(KEY_RECENTS_OPACITY, 40);
+    }
+
+    public static int getAllAppsOpacity(Context context) {
+        SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
+        return prefs.getInt(KEY_APP_DRAWER_OPACITY, 80);
     }
 }
