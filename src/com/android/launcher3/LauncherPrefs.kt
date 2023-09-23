@@ -20,6 +20,7 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.util.Log
+import android.view.ViewConfiguration
 import androidx.annotation.VisibleForTesting
 import com.android.launcher3.LauncherFiles.DEVICE_PREFERENCES_KEY
 import com.android.launcher3.LauncherFiles.SHARED_PREFERENCES_KEY
@@ -278,6 +279,20 @@ class LauncherPrefs(private val encryptedContext: Context) {
         @JvmField
         val ALL_APPS_OVERVIEW_THRESHOLD =
             nonRestorableItem(LauncherAppState.KEY_ALL_APPS_OVERVIEW_THRESHOLD, 180, true)
+        @JvmField 
+        val LONG_PRESS_NAV_HANDLE_SLOP_PERCENTAGE =
+            nonRestorableItem(
+                LauncherAppState.KEY_LONG_PRESS_NAV_HANDLE_SLOP_PERCENTAGE,
+                100,
+                true
+            )
+        @JvmField
+        val LONG_PRESS_NAV_HANDLE_TIMEOUT_MS =
+            nonRestorableItem(
+                LauncherAppState.KEY_LONG_PRESS_NAV_HANDLE_TIMEOUT_MS,
+                ViewConfiguration.getLongPressTimeout(),
+                true
+            )
         @JvmField val THEMED_ICONS = backedUpItem(Themes.KEY_THEMED_ICONS, false, true)
         @JvmField val PROMISE_ICON_IDS = backedUpItem(InstallSessionHelper.PROMISE_ICON_IDS, "")
         @JvmField val WORK_EDU_STEP = backedUpItem(WorkProfileManager.KEY_WORK_EDU_STEP, 0)
