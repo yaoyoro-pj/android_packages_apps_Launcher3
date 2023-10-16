@@ -275,24 +275,52 @@ class LauncherPrefs(private val encryptedContext: Context) {
         @JvmStatic fun get(context: Context): LauncherPrefs = INSTANCE.get(context)
 
         const val TASKBAR_PINNING_KEY = "TASKBAR_PINNING_KEY"
-        @JvmField val ICON_STATE = nonRestorableItem(LauncherAppState.KEY_ICON_STATE, "", true)
+        @JvmField val ICON_STATE = nonRestorableItem("pref_icon_shape_path", "", true)
         @JvmField
         val ALL_APPS_OVERVIEW_THRESHOLD =
-            nonRestorableItem(LauncherAppState.KEY_ALL_APPS_OVERVIEW_THRESHOLD, 180, true)
+            nonRestorableItem("pref_all_apps_overview_threshold", 180, true)
         @JvmField 
         val LONG_PRESS_NAV_HANDLE_SLOP_PERCENTAGE =
             nonRestorableItem(
-                LauncherAppState.KEY_LONG_PRESS_NAV_HANDLE_SLOP_PERCENTAGE,
+                "pref_long_press_nav_handle_slop_multiplier",
                 100,
                 true
             )
         @JvmField
         val LONG_PRESS_NAV_HANDLE_TIMEOUT_MS =
             nonRestorableItem(
-                LauncherAppState.KEY_LONG_PRESS_NAV_HANDLE_TIMEOUT_MS,
+                "pref_long_press_nav_handle_timeout_ms",
                 ViewConfiguration.getLongPressTimeout(),
                 true
             )
+        @JvmField
+        val LONG_PRESS_NAV_HANDLE_HAPTIC_HINT_START_SCALE_PERCENT =
+                nonRestorableItem(
+                        "pref_long_press_nav_handle_haptic_hint_start_scale_percent",
+                        0,
+                        true
+                )
+        @JvmField
+        val LONG_PRESS_NAV_HANDLE_HAPTIC_HINT_END_SCALE_PERCENT =
+                nonRestorableItem(
+                        "pref_long_press_nav_handle_haptic_hint_end_scale_percent",
+                        50,
+                        true
+                )
+        @JvmField
+        val LONG_PRESS_NAV_HANDLE_HAPTIC_HINT_SCALE_EXPONENT =
+                nonRestorableItem(
+                        "pref_long_press_nav_handle_haptic_hint_scale_exponent",
+                        2,
+                        true
+                )
+        @JvmField
+        val LONG_PRESS_NAV_HANDLE_HAPTIC_HINT_ITERATIONS =
+                nonRestorableItem(
+                        "pref_long_press_nav_handle_haptic_hint_iterations",
+                        40,
+                        true
+                )
         @JvmField val THEMED_ICONS = backedUpItem(Themes.KEY_THEMED_ICONS, false, true)
         @JvmField val PROMISE_ICON_IDS = backedUpItem(InstallSessionHelper.PROMISE_ICON_IDS, "")
         @JvmField val WORK_EDU_STEP = backedUpItem(WorkProfileManager.KEY_WORK_EDU_STEP, 0)
