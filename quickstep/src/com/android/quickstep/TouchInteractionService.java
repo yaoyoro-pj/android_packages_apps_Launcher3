@@ -929,9 +929,10 @@ public class TouchInteractionService extends Service {
                 reasonString.append(NEWLINE_PREFIX)
                         .append(reasonPrefix)
                         .append(SUBSTRING_PREFIX)
-                        .append("Long press nav handle enabled, "
-                                + "using NavHandleLongPressInputConsumer");
-                base = new NavHandleLongPressInputConsumer(this, base, mInputMonitorCompat);
+                        .append("Long press nav handle enabled, ")
+                        .append("using NavHandleLongPressInputConsumer");
+                base = new NavHandleLongPressInputConsumer(this, base, mInputMonitorCompat,
+                        mDeviceState);
             }
 
             if (mDeviceState.isBubblesExpanded()) {
