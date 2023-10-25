@@ -31,6 +31,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.LauncherActivityInfo;
 import android.content.pm.LauncherApps;
+import android.content.pm.PackageManager;
 import android.content.pm.ShortcutInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -139,6 +140,8 @@ public final class Utilities {
 
     public static final String KEY_DT_GESTURE = "pref_dt_gesture";
     public static final String KEY_FORCE_MONOCHROME_ICONS = "pref_forced_monochrome_icons";
+
+    public static final String GSA_PACKAGE = "com.google.android.googlequicksearchbox";
 
     /**
      * Indicates if the device has a debug build. Should only be used to store additional info or
@@ -836,5 +839,13 @@ public final class Utilities {
     public static boolean enableMonoChromeThemedIcons(Context context) {
         SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
         return prefs.getBoolean(KEY_FORCE_MONOCHROME_ICONS, false);
+    }
+
+    public static boolean isGSAEnabled(Context context) {
+        try {
+            return context.getPackageManager().getApplicationInfo(GSA_PACKAGE, 0).enabled;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 }
