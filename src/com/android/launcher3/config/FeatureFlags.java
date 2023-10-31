@@ -127,6 +127,10 @@ public final class FeatureFlags {
             getDebugFlag(301680992, "CUSTOM_LPNH_THRESHOLDS", DISABLED,
                     "Add dev options to customize the LPNH trigger slop and milliseconds");
 
+    public static final BooleanFlag ANIMATE_LPNH =
+            getReleaseFlag(308693847, "ANIMATE_LPNH", ENABLED,
+                    "Animates navbar when long pressing");
+
     public static final BooleanFlag ENABLE_SHOW_KEYBOARD_OPTION_IN_ALL_APPS = getReleaseFlag(
             270394468, "ENABLE_SHOW_KEYBOARD_OPTION_IN_ALL_APPS", ENABLED,
             "Enable option to show keyboard when going to all-apps");
