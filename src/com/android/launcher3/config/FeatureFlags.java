@@ -259,6 +259,11 @@ public final class FeatureFlags {
             getReleaseFlag(303023676, "ENABLE_SEARCH_HAPTIC_HINT", TEAMFOOD,
                     "Enables haptic hint when long pressing on the bottom bar nav handle.");
 
+
+    public static final BooleanFlag ENABLE_LPNH_DEEP_PRESS =
+            getReleaseFlag(310952290, "ENABLE_LPNH_DEEP_PRESS", ENABLED,
+                    "Long press of nav handle is instantly triggered if deep press is detected.");
+
     // TODO(Block 17): Clean up flags
     public static final BooleanFlag ENABLE_TASKBAR_PINNING = getDebugFlag(270396583,
             "ENABLE_TASKBAR_PINNING", DISABLED,
