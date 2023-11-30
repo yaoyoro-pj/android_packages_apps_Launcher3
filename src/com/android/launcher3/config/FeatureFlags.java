@@ -131,6 +131,10 @@ public final class FeatureFlags {
             getReleaseFlag(308693847, "ANIMATE_LPNH", ENABLED,
                     "Animates navbar when long pressing");
 
+    public static final BooleanFlag SHRINK_NAV_HANDLE_ON_PRESS =
+            getReleaseFlag(314158312, "SHRINK_NAV_HANDLE_ON_PRESS", ENABLED,
+                    "Shrinks navbar when long pressing if ANIMATE_LPNH is enabled");
+
     public static final BooleanFlag ENABLE_SHOW_KEYBOARD_OPTION_IN_ALL_APPS = getReleaseFlag(
             270394468, "ENABLE_SHOW_KEYBOARD_OPTION_IN_ALL_APPS", ENABLED,
             "Enable option to show keyboard when going to all-apps");

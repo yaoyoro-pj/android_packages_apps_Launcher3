@@ -399,10 +399,10 @@ public class SystemUiProxy implements ISystemUiProxy, NavHandle {
     }
 
     @Override
-    public void animateNavBarLongPress(boolean isTouchDown, long durationMs) {
+    public void animateNavBarLongPress(boolean isTouchDown, boolean shrink, long durationMs) {
         if (mSystemUiProxy != null) {
             try {
-                mSystemUiProxy.animateNavBarLongPress(isTouchDown, durationMs);
+                mSystemUiProxy.animateNavBarLongPress(isTouchDown, shrink, durationMs);
             } catch (RemoteException e) {
                 Log.w(TAG, "Failed call animateNavBarLongPress", e);
             }
