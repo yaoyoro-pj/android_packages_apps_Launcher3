@@ -5987,7 +5987,7 @@ public abstract class RecentsView<ACTIVITY_TYPE extends StatefulActivity<STATE_T
     }
 
     private void doScrollScale() {
-        if (showAsGrid())
+        if (showAsGrid() || mActivity.getDeviceProfile().isTablet)
             return;
 
         boolean isInLandscape = mOrientationState.getTouchRotation() != ROTATION_0
