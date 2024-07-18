@@ -188,7 +188,6 @@ public class HotseatPredictionController implements DragController.DragListener,
     }
 
     private void fillGapsWithPrediction(boolean animate) {
-        Log.d(TAG, "fillGapsWithPrediction flags: " + getStateString(mPauseFlags));
         if (mPauseFlags != 0) {
             return;
         }
@@ -213,16 +212,12 @@ public class HotseatPredictionController implements DragController.DragListener,
             View child = mHotseat.getChildAt(
                     mHotseat.getCellXFromOrder(rank),
                     mHotseat.getCellYFromOrder(rank));
-            Log.d(TAG, "Hotseat app child is: " + child + " and isPredictedIcon() evaluates to"
-                    + ": " + isPredictedIcon(child));
 
             if (child != null && !isPredictedIcon(child)) {
                 continue;
             }
             if (mPredictedItems.size() <= predictionIndex) {
                 // Remove predicted apps from the past
-                Log.d(TAG, "Remove predicted apps from the past\nPrediction Index: "
-                        + predictionIndex);
                 if (isPredictedIcon(child)) {
                     mHotseat.removeView(child);
                 }
@@ -230,7 +225,6 @@ public class HotseatPredictionController implements DragController.DragListener,
             }
             WorkspaceItemInfo predictedItem =
                     (WorkspaceItemInfo) mPredictedItems.get(predictionIndex++);
-            Log.d(TAG, "Predicted item is: " + predictedItem);
             if (child != null) {
                 Log.d(TAG, "Predicted item is enabled: " + child.isEnabled());
             }
@@ -254,7 +248,6 @@ public class HotseatPredictionController implements DragController.DragListener,
     }
 
     private void bindItems(List<WorkspaceItemInfo> itemsToAdd, boolean animate) {
-        Log.d(TAG, "bindItems to hotseat: " + itemsToAdd);
         AnimatorSet animationSet = new AnimatorSet();
         for (WorkspaceItemInfo item : itemsToAdd) {
             PredictedAppIcon icon = PredictedAppIcon.createIcon(mHotseat, item);
@@ -309,10 +302,8 @@ public class HotseatPredictionController implements DragController.DragListener,
     public void setPredictedItems(FixedContainerItems items) {
         mPredictedItems = new ArrayList(items.items);
         if (mPredictedItems.isEmpty()) {
-            Log.d(TAG, "Predicted items is initially empty");
             HotseatRestoreHelper.restoreBackup(mLauncher);
         }
-        Log.d(TAG, "Predicted items: " + mPredictedItems);
         fillGapsWithPrediction();
     }
 
