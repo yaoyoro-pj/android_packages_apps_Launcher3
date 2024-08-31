@@ -842,10 +842,19 @@ public final class Utilities {
     }
 
     public static boolean isGSAEnabled(Context context) {
+        PackageManager pm = context.getPackageManager();
+        if (pm == null) {
+            return false;
+        }
         try {
-            return context.getPackageManager().getApplicationInfo(GSA_PACKAGE, 0).enabled;
+            return pm.getApplicationInfo(GSA_PACKAGE, 0).enabled;
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
+    }
+
+    public static boolean isLongPressToSearchEnabled(Context context) {
+        return Settings.System.getInt(context.getContentResolver(),
+                Settings.System.NAVBAR_LONG_PRESS_GESTURE, 1) == 1;
     }
 }
