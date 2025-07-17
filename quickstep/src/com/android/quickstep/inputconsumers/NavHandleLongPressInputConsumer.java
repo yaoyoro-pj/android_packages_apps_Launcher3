@@ -54,7 +54,7 @@ public class NavHandleLongPressInputConsumer extends DelegateInputConsumer {
                     if (longPressRunnable != null) {
                         setActive(motionEvent);
 
-                        MAIN_EXECUTOR.getHandler().postDelayed(longPressRunnable, 50);
+                        MAIN_EXECUTOR.post(longPressRunnable);
                     }
                 }
             }
