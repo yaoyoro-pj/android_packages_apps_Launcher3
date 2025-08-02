@@ -76,7 +76,7 @@ public class OnboardingPrefs<T extends ActivityContext> {
     static {
         Map<String, Integer> maxCounts = new ArrayMap<>(5);
         maxCounts.put(HOME_BOUNCE_COUNT, 3);
-        maxCounts.put(HOTSEAT_DISCOVERY_TIP_COUNT, 5);
+        maxCounts.put(HOTSEAT_DISCOVERY_TIP_COUNT, 0);
         maxCounts.put(ALL_APPS_VISITED_COUNT, 20);
         maxCounts.put(TASKBAR_EDU_TOOLTIP_STEP, 2);
         MAX_COUNTS = Collections.unmodifiableMap(maxCounts);
