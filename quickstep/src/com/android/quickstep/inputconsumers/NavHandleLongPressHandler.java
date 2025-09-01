@@ -64,11 +64,15 @@ public class NavHandleLongPressHandler implements ResourceBasedOverride {
     public @Nullable Runnable getLongPressRunnable(NavHandle navHandle) {
         if (Utilities.isGSAEnabled(mContext)) {
             VibrationUtils.triggerVibration(mContext, 2);
+            navHandle.animateNavBarLongPress(
+                /*isTouchDown*/ true, /*shrink*/true, /*durationMs*/200);
             if (DEBUG) Log.d(TAG, "getLongPressRunnable: CTS should start now");
             return () -> UI_HELPER_EXECUTOR.execute(() -> {
                 startVoiceSession(mContext, 1);
             });
         }
+        navHandle.animateNavBarLongPress(
+            /*isTouchDown*/false, /*shrink*/ false, /*durationMs*/160);
         return null;
     }
 
@@ -103,5 +107,9 @@ public class NavHandleLongPressHandler implements ResourceBasedOverride {
      * @param navHandle to handle the animation for this touch
      * @param reason why the touch ended
      */
-    public void onTouchFinished(NavHandle navHandle, String reason) {}
+    final void onTouchFinished(NavHandle navHandle, String reason) {
+        Log.i(TAG, "Contextual Search invocation: touch finished with reason: " + reason);
+        navHandle.animateNavBarLongPress(
+            /*isTouchDown*/false, /*shrink*/ true, /*durationMs*/200);
+    }
 }
