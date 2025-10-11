@@ -469,6 +469,7 @@ public abstract class RecentsView<ACTIVITY_TYPE extends StatefulActivity<STATE_T
     protected final RectF mTempRectF = new RectF();
     private final PointF mTempPointF = new PointF();
     private final Matrix mTempMatrix = new Matrix();
+    private final Matrix mAnimMatrix = new Matrix();
     private final float[] mTempFloat = new float[1];
     private final List<OnScrollChangedListener> mScrollListeners = new ArrayList<>();
 
@@ -1227,13 +1228,13 @@ public abstract class RecentsView<ACTIVITY_TYPE extends StatefulActivity<STATE_T
             appAnimator.addUpdateListener(valueAnimator -> {
                 float percent = valueAnimator.getAnimatedFraction();
                 SurfaceTransaction transaction = new SurfaceTransaction();
-                Matrix matrix = new Matrix();
-                matrix.postScale(percent, percent);
-                matrix.postTranslate(mActivity.getDeviceProfile().widthPx * (1 - percent) / 2,
+                mAnimMatrix.reset();
+                mAnimMatrix.postScale(percent, percent);
+                mAnimMatrix.postTranslate(mActivity.getDeviceProfile().widthPx * (1 - percent) / 2,
                         mActivity.getDeviceProfile().heightPx * (1 - percent) / 2);
                 transaction.forSurface(apps[apps.length - 1].leash)
                         .setAlpha(percent)
-                        .setMatrix(matrix);
+                        .setMatrix(mAnimMatrix);
                 surfaceApplier.scheduleApply(transaction);
             });
             appAnimator.addListener(new AnimatorListenerAdapter() {
