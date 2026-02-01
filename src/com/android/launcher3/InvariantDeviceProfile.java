@@ -96,6 +96,7 @@ public class InvariantDeviceProfile implements OnSharedPreferenceChangeListener 
     public static final String KEY_SHOW_DESKTOP_LABELS = "pref_desktop_show_labels";
     public static final String KEY_SHOW_DRAWER_LABELS = "pref_drawer_show_labels";
     public static final String KEY_WORKSPACE_LOCK = "pref_workspace_lock";
+    public static final String KEY_TABLET_OVERVIEW_STYLE = "pref_tablet_overview_style";
 
     // Constants that affects the interpolation curve between statically defined device profile
     // buckets.
@@ -344,6 +345,7 @@ public class InvariantDeviceProfile implements OnSharedPreferenceChangeListener 
             case KEY_ALLAPPS_THEMED_ICONS:
             case KEY_SHOW_DESKTOP_LABELS:
             case KEY_SHOW_DRAWER_LABELS:
+            case KEY_TABLET_OVERVIEW_STYLE:
                 onConfigChanged(mContext);
                 break;
         }

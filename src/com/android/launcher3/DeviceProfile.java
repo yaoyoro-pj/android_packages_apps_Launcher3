@@ -21,6 +21,7 @@ import static com.android.launcher3.InvariantDeviceProfile.INDEX_DEFAULT;
 import static com.android.launcher3.InvariantDeviceProfile.INDEX_LANDSCAPE;
 import static com.android.launcher3.InvariantDeviceProfile.INDEX_TWO_PANEL_LANDSCAPE;
 import static com.android.launcher3.InvariantDeviceProfile.INDEX_TWO_PANEL_PORTRAIT;
+import static com.android.launcher3.InvariantDeviceProfile.KEY_TABLET_OVERVIEW_STYLE;
 import static com.android.launcher3.Utilities.dpiFromPx;
 import static com.android.launcher3.Utilities.pxFromSp;
 import static com.android.launcher3.config.FeatureFlags.ENABLE_MULTI_DISPLAY_PARTIAL_DEPTH;
@@ -33,6 +34,7 @@ import static com.android.launcher3.testing.shared.ResourceUtils.roundPxValueFro
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -328,7 +330,11 @@ public class DeviceProfile {
         mIsScalableGrid = inv.isScalable && !isVerticalBarLayout() && !isMultiWindowMode;
         // Determine device posture.
         mInfo = info;
-        isTablet = info.isTablet(windowBounds);
+        // Check user preference for tablet overview style
+        SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
+        boolean forceTabletStyle = false;
+        forceTabletStyle = prefs.getBoolean(KEY_TABLET_OVERVIEW_STYLE, false);
+        isTablet = info.isTablet(windowBounds) || forceTabletStyle;
         isPhone = !isTablet;
         isTwoPanels = isTablet && isMultiDisplay;
         boolean isTaskBarEnabled = LineageSettings.System.getInt(context.getContentResolver(),
