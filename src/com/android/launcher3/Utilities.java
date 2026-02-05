@@ -142,6 +142,7 @@ public final class Utilities {
     public static final String KEY_FORCE_MONOCHROME_ICONS = "pref_forced_monochrome_icons";
 
     public static final String GSA_PACKAGE = "com.google.android.googlequicksearchbox";
+    public static final String CTS_PACKAGE = "com.akslabs.circletosearch";
 
     /**
      * Indicates if the device has a debug build. Should only be used to store additional info or
@@ -848,6 +849,18 @@ public final class Utilities {
         }
         try {
             return pm.getApplicationInfo(GSA_PACKAGE, 0).enabled;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    public static boolean isCTSAvailable(Context context) {
+        PackageManager pm = context.getPackageManager();
+        if (pm == null) {
+            return false;
+        }
+        try {
+            return pm.getApplicationInfo(CTS_PACKAGE, 0).enabled;
         } catch (PackageManager.NameNotFoundException e) {
             return false;
         }
