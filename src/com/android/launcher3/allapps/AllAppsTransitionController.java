@@ -312,7 +312,9 @@ public class AllAppsTransitionController
         if (hasScaleEffect != mHasScaleEffect) {
             mHasScaleEffect = hasScaleEffect;
             if (mHasScaleEffect) {
-                setClipChildrenOnViewTree(rv, mLauncher.getAppsView(), false);
+                // Do not disable clipping if drawer opening, otherwise we tank frame rate
+                if (scaleProgress < 0.95f)
+                    setClipChildrenOnViewTree(rv, mLauncher.getAppsView(), false);
             } else {
                 restoreClipChildrenOnViewTree(rv, mLauncher.getAppsView());
             }
