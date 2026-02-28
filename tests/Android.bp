@@ -115,11 +115,11 @@ android_test {
     ],
     use_embedded_native_libs: false,
     compile_multilib: "both",
-    instrumentation_for: "Trebuchet",
+    instrumentation_for: "Launcher3",
     manifest: "AndroidManifest.xml",
     platform_apis: true,
     test_config: "Launcher3Tests.xml",
-    data: [":Trebuchet"],
+    data: [":Launcher3"],
     test_suites: ["general-tests"],
 }
 
