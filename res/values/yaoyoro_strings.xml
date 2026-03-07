@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="pref_tablet_overview_style_title">Tablet overview style (Need launcher restart)</string>
+    <string name="pref_tablet_overview_style_title">Force tablet style</string>
+    <string name="pref_tablet_overview_style_summary">For all launcher elements. Not recommended...?</string>
 </resources>
