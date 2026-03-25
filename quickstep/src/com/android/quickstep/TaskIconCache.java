@@ -180,9 +180,8 @@ public class TaskIconCache implements DisplayInfoChangeListener {
             activityInfo = PackageManagerWrapper.getInstance().getActivityInfo(
                     key.getComponent(), key.userId);
             if (activityInfo != null) {
-                String themedIconPack = Themes.getThemedIconPack(mContext);
                 BitmapInfo bitmapInfo = getBitmapInfo(
-                        mIconProvider.getIcon(activityInfo, mThemedIconsEnabled ? themedIconPack : null),
+                        mIconProvider.getIcon(activityInfo),
                         key.userId,
                         desc.getPrimaryColor(),
                         activityInfo.applicationInfo.isInstantApp());
