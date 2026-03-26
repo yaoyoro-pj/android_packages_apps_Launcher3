@@ -38,4 +38,4 @@
     android:singleLine="true"
     android:textColor="?android:attr/textColorPrimary"
     android:textColorHint="?attr/allAppsSearchTextColor"
-    android:textSize="20sp" />
+    android:textSize="16sp" />
