@@ -200,6 +200,10 @@ public class TaskbarViewController implements TaskbarControllers.LoggableTaskbar
         return mTaskbarView.areIconsVisible();
     }
 
+    public void setTaskbarViewVisible(boolean visible) {
+        mTaskbarView.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+    }
+
     public MultiPropertyFactory<View> getTaskbarIconAlpha() {
         return mTaskbarIconAlpha;
     }
