@@ -256,7 +256,7 @@ public class QuickstepTransitionManager implements OnDeviceProfileChangeListener
     private final Interpolator mOpeningInterpolator;
 
     static {
-        long duration = getDuration(500);
+        long duration = getDuration(350);
         APP_LAUNCH_DURATION = duration;
         int duration2 = getDuration(266);
         ANIMATION_NAV_FADE_IN_DURATION = duration2;
@@ -266,7 +266,7 @@ public class QuickstepTransitionManager implements OnDeviceProfileChangeListener
         NAV_FADE_OUT_INTERPOLATOR = new PathInterpolator(0.2f, 0.0f, 1.0f, 1.0f);
         RECENTS_LAUNCH_DURATION = getDuration(336);
         LAUNCHER_RESUME_START_DELAY = getDuration(100);
-        CLOSING_TRANSITION_DURATION_MS = getDuration(250);
+        CLOSING_TRANSITION_DURATION_MS = getDuration(200);
         SPLIT_LAUNCH_DURATION = getDuration(370);
         SPLIT_DIVIDER_ANIM_DURATION = getDuration(100);
         CONTENT_ALPHA_DURATION = getDuration(217);
