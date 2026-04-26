@@ -186,8 +186,8 @@ public class QuickstepTransitionManager implements OnDeviceProfileChangeListener
 
     public static final long APP_LAUNCH_DURATION;
 
-    private static final long APP_LAUNCH_ALPHA_DURATION = 50;
-    private static final long APP_LAUNCH_ALPHA_START_DELAY = 25;
+    private static final long APP_LAUNCH_ALPHA_DURATION = 80;
+    private static final long APP_LAUNCH_ALPHA_START_DELAY = 15;
 
     public static final int ANIMATION_NAV_FADE_IN_DURATION;
     public static final int ANIMATION_NAV_FADE_OUT_DURATION;
@@ -213,7 +213,7 @@ public class QuickstepTransitionManager implements OnDeviceProfileChangeListener
     private static final int MAX_NUM_TASKS = 5;
 
     // Cross-fade duration between App Widget and App
-    private static final int WIDGET_CROSSFADE_DURATION_MILLIS = 125;
+    private static final int WIDGET_CROSSFADE_DURATION_MILLIS = 180;
 
     protected final QuickstepLauncher mLauncher;
     protected final DragLayer mDragLayer;
@@ -256,7 +256,7 @@ public class QuickstepTransitionManager implements OnDeviceProfileChangeListener
     private final Interpolator mOpeningInterpolator;
 
     static {
-        long duration = getDuration(500);
+        long duration = getDuration(450);
         APP_LAUNCH_DURATION = duration;
         int duration2 = getDuration(266);
         ANIMATION_NAV_FADE_IN_DURATION = duration2;
@@ -266,11 +266,11 @@ public class QuickstepTransitionManager implements OnDeviceProfileChangeListener
         NAV_FADE_OUT_INTERPOLATOR = new PathInterpolator(0.2f, 0.0f, 1.0f, 1.0f);
         RECENTS_LAUNCH_DURATION = getDuration(336);
         LAUNCHER_RESUME_START_DELAY = getDuration(100);
-        CLOSING_TRANSITION_DURATION_MS = getDuration(250);
+        CLOSING_TRANSITION_DURATION_MS = getDuration(280);
         SPLIT_LAUNCH_DURATION = getDuration(370);
         SPLIT_DIVIDER_ANIM_DURATION = getDuration(100);
         CONTENT_ALPHA_DURATION = getDuration(217);
-        CONTENT_SCALE_DURATION = getDuration(350);
+        CONTENT_SCALE_DURATION = getDuration(300);
         CONTENT_SCRIM_DURATION = getDuration(350);
     }
 
@@ -572,7 +572,7 @@ public class QuickstepTransitionManager implements OnDeviceProfileChangeListener
 
                 ObjectAnimator scaleAnim = ObjectAnimator.ofFloat(view, SCALE_PROPERTY, scales)
                         .setDuration(CONTENT_SCALE_DURATION);
-                scaleAnim.setInterpolator(DECELERATE_1_5);
+                scaleAnim.setInterpolator(DECELERATE_1_7);
                 launcherAnimator.play(scaleAnim);
             });
 
@@ -750,8 +750,9 @@ public class QuickstepTransitionManager implements OnDeviceProfileChangeListener
             FloatProp mIconAlpha = new FloatProp(prop.iconAlphaStart, 0f,
                     APP_LAUNCH_ALPHA_START_DELAY, APP_LAUNCH_ALPHA_DURATION, LINEAR);
 
+            final Interpolator cornerInterpolator = new PathInterpolator(0.2f, 0f, 0.2f, 1f);
             FloatProp mWindowRadius = new FloatProp(initialWindowRadius, finalWindowRadius, 0,
-                    APP_LAUNCH_DURATION, mOpeningInterpolator);
+                    APP_LAUNCH_DURATION, cornerInterpolator);
             FloatProp mShadowRadius = new FloatProp(0, finalShadowRadius, 0,
                     APP_LAUNCH_DURATION, mOpeningInterpolator);
 
@@ -764,7 +765,7 @@ public class QuickstepTransitionManager implements OnDeviceProfileChangeListener
             FloatProp mCropRectHeight = new FloatProp(prop.cropHeightStart, prop.cropHeightEnd, 0,
                     APP_LAUNCH_DURATION, mOpeningInterpolator);
 
-            FloatProp mNavFadeOut = new FloatProp(1f, 0f, 0, ANIMATION_NAV_FADE_OUT_DURATION,
+            FloatProp mNavFadeOut = new FloatProp(1f, 0f, 20, ANIMATION_NAV_FADE_OUT_DURATION,
                     NAV_FADE_OUT_INTERPOLATOR);
             FloatProp mNavFadeIn = new FloatProp(0f, 1f, ANIMATION_DELAY_NAV_FADE_IN,
                     ANIMATION_NAV_FADE_IN_DURATION, NAV_FADE_IN_INTERPOLATOR);
@@ -960,12 +961,13 @@ public class QuickstepTransitionManager implements OnDeviceProfileChangeListener
                     0 /* end */, 0 /* delay */,
                     WIDGET_CROSSFADE_DURATION_MILLIS / 2 /* duration */, LINEAR);
             final FloatProp mWidgetFallbackBackgroundAlpha = new FloatProp(0 /* start */,
-                    1 /* end */, 0 /* delay */, 75 /* duration */, LINEAR);
+                    1 /* end */, 0 /* delay */, 75 /* duration */, DECELERATE_1_5);
             final FloatProp mPreviewAlpha = new FloatProp(0 /* start */, 1 /* end */,
                     WIDGET_CROSSFADE_DURATION_MILLIS / 2 /* delay */,
                     WIDGET_CROSSFADE_DURATION_MILLIS / 2 /* duration */, LINEAR);
+            final Interpolator cornerInterpolator = new PathInterpolator(0.2f, 0f, 0.2f, 1f);
             final FloatProp mWindowRadius = new FloatProp(initialWindowRadius, finalWindowRadius,
-                    0 /* start */, APP_LAUNCH_DURATION, mOpeningInterpolator);
+                    0 /* start */, APP_LAUNCH_DURATION, cornerInterpolator);
             final FloatProp mCornerRadiusProgress = new FloatProp(0, 1, 0, APP_LAUNCH_DURATION,
                     mOpeningInterpolator);
 
@@ -1928,8 +1930,11 @@ public class QuickstepTransitionManager implements OnDeviceProfileChangeListener
             mWindowTargetBounds.set(windowTargetBounds);
         }
 
+        private static final Interpolator CORNER_LEAD_INTERPOLATOR =
+                new PathInterpolator(0.2f, 0f, 0.2f, 1f);
         public float getCornerRadius(float progress) {
-            return Utilities.mapRange(progress, mStartRadius, mEndRadius);
+            float curvedProgress = CORNER_LEAD_INTERPOLATOR.getInterpolation(progress);
+            return Utilities.mapRange(curvedProgress, mStartRadius, mEndRadius);
         }
 
         @Override
