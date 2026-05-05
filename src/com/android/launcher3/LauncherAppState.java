@@ -95,7 +95,6 @@ public class LauncherAppState implements SafeCloseable {
 
     public LauncherAppState(Context context) {
         this(context, LauncherFiles.APP_ICONS_DB);
-        Log.v(Launcher.TAG, "LauncherAppState initiated");
         Preconditions.assertUIThread();
 
         mInvariantDeviceProfile.addOnChangeListener(modelPropertiesChanged -> {

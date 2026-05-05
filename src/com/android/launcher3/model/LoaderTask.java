@@ -770,9 +770,6 @@ public class LoaderTask implements Runnable {
                             }
                             appWidgetInfo.restoreStatus = status;
                         } else {
-                            Log.v(TAG, "Widget restore pending id=" + c.id
-                                    + " appWidgetId=" + appWidgetId
-                                    + " status =" + c.restoreFlag);
                             appWidgetInfo = new LauncherAppWidgetInfo(appWidgetId, component);
                             appWidgetInfo.restoreStatus = c.restoreFlag;
 

@@ -282,10 +282,6 @@ public class WidgetsListAdapter extends Adapter<ViewHolder> implements OnHeaderC
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (DEBUG) {
-            Log.v(TAG, "\nonCreateViewHolder");
-        }
-
         return mViewHolderBinders.get(viewType).newViewHolder(parent);
     }
 

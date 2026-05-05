@@ -129,9 +129,6 @@ public class GridSizeMigrationUtil {
 
             return false;
         } finally {
-            Log.v(TAG, "Workspace migration completed in "
-                    + (System.currentTimeMillis() - migrationStartTime));
-
             // Save current configuration, so that the migration does not run again.
             destDeviceState.writeToPrefs(context);
         }

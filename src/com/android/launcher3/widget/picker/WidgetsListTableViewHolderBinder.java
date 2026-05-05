@@ -73,10 +73,6 @@ public final class WidgetsListTableViewHolderBinder
 
     @Override
     public WidgetsRowViewHolder newViewHolder(ViewGroup parent) {
-        if (DEBUG) {
-            Log.v(TAG, "\nonCreateViewHolder");
-        }
-
         return new WidgetsRowViewHolder(mLayoutInflater.inflate(
                         R.layout.widgets_table_container, parent, false));
     }
