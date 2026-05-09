@@ -67,7 +67,6 @@ import java.util.stream.Collectors;
 public class GridSizeMigrationUtil {
 
     private static final String TAG = "GridSizeMigrationUtil";
-    private static final boolean DEBUG = true;
 
     private GridSizeMigrationUtil() {
         // Util class should not be instantiated
@@ -155,26 +154,6 @@ public class GridSizeMigrationUtil {
         final int trgX = targetSize.x;
         final int trgY = targetSize.y;
 
-        if (DEBUG) {
-            Log.d(TAG, "Start migration:"
-                    + "\n Source Device:"
-                    + srcWorkspaceItems.stream().map(DbEntry::toString).collect(
-                    Collectors.joining(",\n", "[", "]"))
-                    + "\n Target Device:"
-                    + dstWorkspaceItems.stream().map(DbEntry::toString).collect(
-                    Collectors.joining(",\n", "[", "]"))
-                    + "\n Removing Items:"
-                    + dstWorkspaceItems.stream().filter(entry ->
-                            toBeRemoved.contains(entry.id)).map(DbEntry::toString).collect(
-                    Collectors.joining(",\n", "[", "]"))
-                    + "\n Adding Workspace Items:"
-                    + workspaceToBeAdded.stream().map(DbEntry::toString).collect(
-                    Collectors.joining(",\n", "[", "]"))
-                    + "\n Adding Hotseat Items:"
-                    + hotseatToBeAdded.stream().map(DbEntry::toString).collect(
-                    Collectors.joining(",\n", "[", "]"))
-            );
-        }
         if (!toBeRemoved.isEmpty()) {
             removeEntryFromDb(destReader.mDb, destReader.mTableName, toBeRemoved);
         }
@@ -205,9 +184,6 @@ public class GridSizeMigrationUtil {
 
         // Then we place the items on the screens
         for (int screenId : screens) {
-            if (DEBUG) {
-                Log.d(TAG, "Migrating " + screenId);
-            }
             solveGridPlacement(helper, srcReader,
                     destReader, screenId, trgX, trgY, workspaceToBeAdded, false);
             if (workspaceToBeAdded.isEmpty()) {
@@ -466,9 +442,6 @@ public class GridSizeMigrationUtil {
                             throw new Exception("Invalid item type");
                     }
                 } catch (Exception e) {
-                    if (DEBUG) {
-                        Log.d(TAG, "Removing item " + entry.id, e);
-                    }
                     entriesToRemove.add(entry.id);
                     continue;
                 }
@@ -563,9 +536,6 @@ public class GridSizeMigrationUtil {
                             throw new Exception("Invalid item type");
                     }
                 } catch (Exception e) {
-                    if (DEBUG) {
-                        Log.d(TAG, "Removing item " + entry.id, e);
-                    }
                     entriesToRemove.add(entry.id);
                     continue;
                 }

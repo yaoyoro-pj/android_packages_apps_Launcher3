@@ -58,7 +58,6 @@ import com.android.systemui.shared.recents.utilities.PreviewPositionHelper;
 public class TaskViewSimulator implements TransformParams.BuilderProxy {
 
     private static final String TAG = "TaskViewSimulator";
-    private static final boolean DEBUG = false;
 
     private final Rect mTmpCropRect = new Rect();
     private final RectF mTempRectF = new RectF();
@@ -338,9 +337,6 @@ public class TaskViewSimulator implements TransformParams.BuilderProxy {
                     mDp.widthPx, mDp.heightPx, mDp.taskbarHeight, mDp.isTablet,
                     mOrientationState.getRecentsActivityRotation(), isRtlEnabled);
             mPositionHelper.getMatrix().invert(mInversePositionMatrix);
-            if (DEBUG) {
-                Log.d(TAG, " taskRect: " + mTaskRect);
-            }
         }
 
         float fullScreenProgress = Utilities.boundToRange(this.fullScreenProgress.value, 0, 1);
@@ -379,23 +375,6 @@ public class TaskViewSimulator implements TransformParams.BuilderProxy {
             params.setProgress(1f - fullScreenProgress);
             params.applySurfaceParams(params.createSurfaceParams(this));
         }
-
-        if (!DEBUG) {
-            return;
-        }
-        Log.d(TAG, "progress: " + fullScreenProgress
-                + " recentsViewScale: " + recentsViewScale.value
-                + " crop: " + mTmpCropRect
-                + " radius: " + getCurrentCornerRadius()
-                + " taskW: " + taskWidth + " H: " + taskHeight
-                + " taskRect: " + mTaskRect
-                + " taskPrimaryT: " + taskPrimaryTranslation.value
-                + " recentsPrimaryT: " + recentsViewPrimaryTranslation.value
-                + " recentsSecondaryT: " + recentsViewSecondaryTranslation.value
-                + " taskSecondaryT: " + taskSecondaryTranslation.value
-                + " recentsScroll: " + recentsViewScroll.value
-                + " pivot: " + mPivot
-        );
     }
 
     @Override

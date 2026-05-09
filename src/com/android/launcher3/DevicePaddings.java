@@ -48,7 +48,6 @@ public class DevicePaddings {
     private static final String HOTSEAT_BOTTOM_PADDING = "hotseatBottomPadding";
 
     private static final String TAG = DevicePaddings.class.getSimpleName();
-    private static final boolean DEBUG = false;
 
     ArrayList<DevicePadding> mDevicePaddings = new ArrayList<>();
 
@@ -179,13 +178,6 @@ public class DevicePaddings {
             int hotseatBottomPadding = getHotseatBottomPadding(maxEmptySpacePx);
             int sum = workspaceTopPadding + workspaceBottomPadding + hotseatBottomPadding;
             int diff = Math.abs(sum - maxEmptySpacePx);
-            if (DEBUG) {
-                Log.d(TAG, "isValid: workspaceTopPadding=" + workspaceTopPadding
-                        + ", workspaceBottomPadding=" + workspaceBottomPadding
-                        + ", hotseatBottomPadding=" + hotseatBottomPadding
-                        + ", sum=" + sum
-                        + ", diff=" + diff);
-            }
             return diff <= ROUNDING_THRESHOLD_PX;
         }
     }
@@ -213,9 +205,6 @@ public class DevicePaddings {
         }
 
         public int calculate(int extraSpacePx) {
-            if (DEBUG) {
-                Log.d(TAG, "a=" + a + " * (" + extraSpacePx + " - " + c + ") + b=" + b);
-            }
             return Math.round(a * (extraSpacePx - c) + b);
         }
 

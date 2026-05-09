@@ -64,7 +64,6 @@ import java.util.StringJoiner;
 public class TaskbarLauncherStateController {
 
     private static final String TAG = TaskbarLauncherStateController.class.getSimpleName();
-    private static final boolean DEBUG = false;
 
     /** Launcher activity is resumed and focused. */
     public static final int FLAG_RESUMED = 1 << 0;
@@ -272,9 +271,6 @@ public class TaskbarLauncherStateController {
         TaskbarStashController stashController = mControllers.taskbarStashController;
         stashController.updateStateForFlag(FLAG_IN_STASHED_LAUNCHER_STATE,
                 toState.isTaskbarStashed(mLauncher));
-        if (DEBUG) {
-            Log.d(TAG, "createAnimToLauncher - FLAG_IN_APP: " + false);
-        }
         stashController.updateStateForFlag(FLAG_IN_APP, false);
 
         updateStateForFlag(FLAG_TRANSITION_TO_RESUMED, true);
@@ -379,19 +375,6 @@ public class TaskbarLauncherStateController {
         if (mPrevState == null || mPrevState != mState) {
             // If this is our initial state, treat all flags as changed.
             int changedFlags = mPrevState == null ? FLAGS_ALL : mPrevState ^ mState;
-
-            if (DEBUG) {
-                String stateString;
-                if (mPrevState == null) {
-                    stateString = getStateString(mState) + "(initial update)";
-                } else {
-                    stateString = formatFlagChange(mState, mPrevState,
-                            TaskbarLauncherStateController::getStateString);
-                }
-                Log.d(TAG, "applyState: " + stateString
-                        + ", duration: " + duration
-                        + ", start: " + start);
-            }
             mPrevState = mState;
             animator = onStateChangeApplied(changedFlags, duration, start);
         }
@@ -403,11 +386,6 @@ public class TaskbarLauncherStateController {
         final boolean isIconAlignedWithHotseat = isIconAlignedWithHotseat();
         final float toAlignment = isIconAlignedWithHotseat ? 1 : 0;
         boolean handleOpenFloatingViews = false;
-        if (DEBUG) {
-            Log.d(TAG, "onStateChangeApplied - isInLauncher: " + isInLauncher
-                    + ", mLauncherState: " + mLauncherState
-                    + ", toAlignment: " + toAlignment);
-        }
         mControllers.bubbleControllers.ifPresent(controllers -> {
             // Show the bubble bar when on launcher home or in overview.
             boolean onHome = isInLauncher && mLauncherState == LauncherState.NORMAL;
@@ -446,9 +424,6 @@ public class TaskbarLauncherStateController {
 
                     TaskbarStashController stashController =
                             mControllers.taskbarStashController;
-                    if (DEBUG) {
-                        Log.d(TAG, "onAnimationStart - FLAG_IN_APP: " + !isInLauncher);
-                    }
                     stashController.updateStateForFlag(FLAG_IN_APP, !isInLauncher);
                     stashController.applyState(duration);
                 }
@@ -508,11 +483,6 @@ public class TaskbarLauncherStateController {
         if (mTaskbarBackgroundAlpha.isAnimating()
                 || mTaskbarBackgroundAlpha.value != backgroundAlpha) {
             mTaskbarBackgroundAlpha.cancelAnimation();
-            if (DEBUG) {
-                Log.d(TAG, "onStateChangeApplied - taskbarBackgroundAlpha - "
-                        + mTaskbarBackgroundAlpha.value
-                        + " -> " + backgroundAlpha + ": " + duration);
-            }
 
             boolean isInLauncherIconNotAligned = isInLauncher && !isIconAlignedWithHotseat;
             boolean notInLauncherIconNotAligned = !isInLauncher && !isIconAlignedWithHotseat;
@@ -545,11 +515,6 @@ public class TaskbarLauncherStateController {
         if (mTaskbarCornerRoundness.isAnimating()
                 || mTaskbarCornerRoundness.value != cornerRoundness) {
             mTaskbarCornerRoundness.cancelAnimation();
-            if (DEBUG) {
-                Log.d(TAG, "onStateChangeApplied - taskbarCornerRoundness - "
-                        + mTaskbarCornerRoundness.value
-                        + " -> " + cornerRoundness + ": " + duration);
-            }
             animatorSet.play(mTaskbarCornerRoundness.animateToValue(cornerRoundness));
         }
 
@@ -580,11 +545,6 @@ public class TaskbarLauncherStateController {
             ObjectAnimator iconAlignAnim = mIconAlignment
                     .animateToValue(toAlignment)
                     .setDuration(duration);
-            if (DEBUG) {
-                Log.d(TAG, "onStateChangeApplied - iconAlignment - "
-                        + mIconAlignment.value
-                        + " -> " + toAlignment + ": " + duration);
-            }
             animatorSet.play(iconAlignAnim);
         }
 
@@ -758,9 +718,6 @@ public class TaskbarLauncherStateController {
             applyState();
 
             TaskbarStashController controller = mControllers.taskbarStashController;
-            if (DEBUG) {
-                Log.d(TAG, "endGestureStateOverride - FLAG_IN_APP: " + finishedToApp);
-            }
             controller.updateStateForFlag(FLAG_IN_APP, finishedToApp);
             controller.applyState();
         }

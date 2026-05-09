@@ -61,7 +61,6 @@ public class InstallSessionHelper {
     @NonNull
     public static final String PROMISE_ICON_IDS = "promise_icon_ids";
 
-    private static final boolean DEBUG = false;
 
     @NonNull
     public static final MainThreadInitializedObject<InstallSessionHelper> INSTANCE =
@@ -166,7 +165,7 @@ public class InstallSessionHelper {
     public boolean isTrustedPackage(String pkg, UserHandle user) {
         synchronized (mSessionVerifiedMap) {
             if (!mSessionVerifiedMap.containsKey(pkg)) {
-                boolean hasSystemFlag = DEBUG || mAppContext.getPackageName().equals(pkg)
+                boolean hasSystemFlag = mAppContext.getPackageName().equals(pkg)
                         || new PackageManagerHelper(mAppContext)
                                 .getApplicationInfo(pkg, user, ApplicationInfo.FLAG_SYSTEM) != null;
                 mSessionVerifiedMap.put(pkg, hasSystemFlag);

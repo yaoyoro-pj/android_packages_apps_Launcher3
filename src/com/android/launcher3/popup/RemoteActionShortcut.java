@@ -45,7 +45,6 @@ import java.lang.ref.WeakReference;
 @TargetApi(Build.VERSION_CODES.Q)
 public class RemoteActionShortcut extends SystemShortcut<BaseDraggingActivity> {
     private static final String TAG = "RemoteActionShortcut";
-    private static final boolean DEBUG = Utilities.IS_DEBUG_DEVICE;
 
     private final RemoteAction mAction;
 
@@ -89,7 +88,6 @@ public class RemoteActionShortcut extends SystemShortcut<BaseDraggingActivity> {
 
         ActivityOptions options = allowBGLaunch(ActivityOptions.makeBasic());
         try {
-            if (DEBUG) Log.d(TAG, "Sending action: " + actionIdentity);
             mAction.getActionIntent().send(
                     mTarget,
                     0,
@@ -97,7 +95,6 @@ public class RemoteActionShortcut extends SystemShortcut<BaseDraggingActivity> {
                             Intent.EXTRA_PACKAGE_NAME,
                             mItemInfo.getTargetComponent().getPackageName()),
                     (pendingIntent, intent, resultCode, resultData, resultExtras) -> {
-                        if (DEBUG) Log.d(TAG, "Action is complete: " + actionIdentity);
                         final BaseDraggingActivity target = weakTarget.get();
                         if (resultData != null && !resultData.isEmpty()) {
                             Log.e(TAG, "Remote action returned result: " + actionIdentity

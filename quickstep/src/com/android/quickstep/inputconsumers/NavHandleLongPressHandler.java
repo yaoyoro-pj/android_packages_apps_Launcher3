@@ -41,7 +41,6 @@ import static com.android.launcher3.util.Executors.UI_HELPER_EXECUTOR;
 public class NavHandleLongPressHandler implements ResourceBasedOverride {
 
     private final String TAG = "NavHandleLongPressHandler";
-    private final boolean DEBUG = false;
 
     private final Context mContext;
 
@@ -67,7 +66,6 @@ public class NavHandleLongPressHandler implements ResourceBasedOverride {
             VibrationUtils.triggerVibration(mContext, 2);
             navHandle.animateNavBarLongPress(
                 /*isTouchDown*/ true, /*shrink*/true, /*durationMs*/200);
-            if (DEBUG) Log.d(TAG, "getLongPressRunnable: CTS should start now");
             return () -> UI_HELPER_EXECUTOR.execute(() -> {
                 startVoiceSession(mContext, 1);
             });
@@ -96,7 +94,6 @@ public class NavHandleLongPressHandler implements ResourceBasedOverride {
         bundle.putInt("omni.entry_point", entry_point);
         boolean showVoiceSession = ActivityManagerWrapper.getInstance().showVoiceSession((IBinder) null, bundle, 7, context.getAttributionTag());
         if (!showVoiceSession) {
-            if (DEBUG) Log.d(TAG, "startVoiceSession: Omni invocation failed: invocation error");
         }
         return showVoiceSession;
     }

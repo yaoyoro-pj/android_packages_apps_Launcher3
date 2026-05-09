@@ -68,7 +68,6 @@ import java.util.StringJoiner;
 public class DisplayController implements ComponentCallbacks, SafeCloseable {
 
     private static final String TAG = "DisplayController";
-    private static final boolean DEBUG = false;
     private static boolean sTransientTaskbarStatusForTests;
 
     // TODO(b/254119092) remove all logs with this tag
@@ -289,9 +288,6 @@ public class DisplayController implements ComponentCallbacks, SafeCloseable {
             FileLog.w(TAG,
                     "(CHANGE_SUPPORTED_BOUNDS) perDisplayBounds: " + newInfo.mPerDisplayBounds);
         }
-        if (DEBUG) {
-            Log.d(TAG, "handleInfoChange - change: " + getChangeFlagsString(change));
-        }
 
         if (change != 0) {
             mInfo = newInfo;
@@ -381,12 +377,6 @@ public class DisplayController implements ComponentCallbacks, SafeCloseable {
                 }
             }
             mPerDisplayBounds.values().forEach(supportedBounds::addAll);
-            if (DEBUG) {
-                Log.d(TAG, "displayInfo: " + displayInfo);
-                Log.d(TAG, "realBounds: " + realBounds);
-                Log.d(TAG, "normalizedDisplayInfo: " + normalizedDisplayInfo);
-                Log.d(TAG, "perDisplayBounds: " + mPerDisplayBounds);
-            }
         }
 
         /**

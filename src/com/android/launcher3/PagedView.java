@@ -70,7 +70,6 @@ import java.util.function.Consumer;
  */
 public abstract class PagedView<T extends View & PageIndicator> extends ViewGroup {
     private static final String TAG = "PagedView";
-    private static final boolean DEBUG = false;
     public static final boolean DEBUG_FAILED_QUICKSWITCH = false;
 
     public static final int ACTION_MOVE_ALLOW_EASY_FLING = MotionEvent.ACTION_MASK - 1;
@@ -680,7 +679,6 @@ public abstract class PagedView<T extends View & PageIndicator> extends ViewGrou
 
         // The children are given the same width and height as the workspace
         // unless they were set to WRAP_CONTENT
-        if (DEBUG) Log.d(TAG, "PagedView.onMeasure(): " + widthSize + ", " + heightSize);
 
         int myWidthSpec = MeasureSpec.makeMeasureSpec(
                 getPageWidthSize(widthSize), MeasureSpec.EXACTLY);
@@ -727,7 +725,6 @@ public abstract class PagedView<T extends View & PageIndicator> extends ViewGrou
             pageScrollChanged = true;
         }
 
-        if (DEBUG) Log.d(TAG, "PagedView.onLayout()");
 
         pageScrollChanged |= getPageScrolls(pageScrolls, true, SIMPLE_SCROLL_LOGIC);
         mPageScrolls = pageScrolls;

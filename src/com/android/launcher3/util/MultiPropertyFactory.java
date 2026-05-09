@@ -52,7 +52,6 @@ public class MultiPropertyFactory<T> {
                 }
             };
 
-    private static final boolean DEBUG = false;
     private static final String TAG = "MultiPropertyFactory";
     private final MultiPropertyFactory<?>.MultiProperty[] mProperties;
 
@@ -156,14 +155,6 @@ public class MultiPropertyFactory<T> {
             mValue = newValue;
             apply(lastAggregatedValue);
 
-            if (DEBUG) {
-                Log.d(TAG, "name=" + mProperty.getName()
-                        + " target=" + mTarget.getClass()
-                        + " newValue=" + newValue
-                        + " mInx=" + mInx
-                        + " aggregated=" + lastAggregatedValue
-                        + " others= " + Arrays.deepToString(mProperties));
-            }
         }
 
         public float getValue() {

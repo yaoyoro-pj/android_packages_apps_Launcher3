@@ -26,7 +26,6 @@ import android.view.MotionEvent;
 public class OrientationRectF extends RectF {
 
     private static final String TAG = "OrientationRectF";
-    private static final boolean DEBUG = false;
 
     private final int mRotation;
     private final float mHeight;
@@ -70,12 +69,6 @@ public class OrientationRectF extends RectF {
         mTmpMatrix.reset();
         postDisplayRotation(deltaRotation, mHeight, mWidth, mTmpMatrix);
         if (forceTransform) {
-            if (DEBUG) {
-                Log.d(TAG, "Transforming rotation due to forceTransform, "
-                        + "deltaRotation: " + deltaRotation
-                        + "mRotation: " + mRotation
-                        + " this: " + this);
-            }
             event.applyTransform(mTmpMatrix);
             return true;
         }
@@ -83,13 +76,6 @@ public class OrientationRectF extends RectF {
         mTmpPoint[1] = event.getY();
         mTmpMatrix.mapPoints(mTmpPoint);
 
-        if (DEBUG) {
-            Log.d(TAG, "original: " + event.getX() + ", " + event.getY()
-                    + " new: " + mTmpPoint[0] + ", " + mTmpPoint[1]
-                    + " rect: " + this + " forceTransform: " + forceTransform
-                    + " contains: " + contains(mTmpPoint[0], mTmpPoint[1])
-                    + " this: " + this);
-        }
 
         if (contains(mTmpPoint[0], mTmpPoint[1])) {
             event.applyTransform(mTmpMatrix);

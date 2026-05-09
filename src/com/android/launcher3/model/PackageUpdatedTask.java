@@ -68,7 +68,6 @@ import java.util.stream.Collectors;
  */
 public class PackageUpdatedTask extends BaseModelUpdateTask {
 
-    private static boolean DEBUG = false;
     private static final String TAG = "PackageUpdatedTask";
 
     public static final int OP_NONE = 0;
@@ -114,7 +113,6 @@ public class PackageUpdatedTask extends BaseModelUpdateTask {
         switch (mOp) {
             case OP_ADD: {
                 for (int i = 0; i < N; i++) {
-                    if (DEBUG) Log.d(TAG, "mAllAppsList.addPackage " + packages[i]);
                     iconCache.updateIconsForPkg(packages[i], mUser);
                     if (FeatureFlags.PROMISE_APPS_IN_ALL_APPS.get()) {
                         appsList.removePackage(packages[i], mUser);
@@ -129,7 +127,6 @@ public class PackageUpdatedTask extends BaseModelUpdateTask {
                 try (SafeCloseable t =
                              appsList.trackRemoves(a -> removedComponents.add(a.componentName))) {
                     for (int i = 0; i < N; i++) {
-                        if (DEBUG) Log.d(TAG, "mAllAppsList.updatePackage " + packages[i]);
                         iconCache.updateIconsForPkg(packages[i], mUser);
                         activitiesLists.put(
                                 packages[i], appsList.updatePackage(context, packages[i], mUser));
@@ -155,7 +152,6 @@ public class PackageUpdatedTask extends BaseModelUpdateTask {
             }
             case OP_UNAVAILABLE:
                 for (int i = 0; i < N; i++) {
-                    if (DEBUG) Log.d(TAG, "mAllAppsList.removePackage " + packages[i]);
                     appsList.removePackage(packages[i], mUser);
                 }
                 flagOp = FlagOp.NO_OP.addFlag(WorkspaceItemInfo.FLAG_DISABLED_NOT_AVAILABLE);
@@ -164,7 +160,6 @@ public class PackageUpdatedTask extends BaseModelUpdateTask {
             case OP_UNSUSPEND:
                 flagOp = FlagOp.NO_OP.setFlag(
                         WorkspaceItemInfo.FLAG_DISABLED_SUSPENDED, mOp == OP_SUSPEND);
-                if (DEBUG) Log.d(TAG, "mAllAppsList.(un)suspend " + N);
                 appsList.updateDisabledFlags(matcher, flagOp);
                 break;
             case OP_USER_AVAILABILITY_CHANGE: {

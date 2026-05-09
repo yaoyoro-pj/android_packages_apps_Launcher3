@@ -67,7 +67,6 @@ import java.util.Map;
 public final class WellbeingModel extends BgObjectWithLooper {
     private static final String TAG = "WellbeingModel";
     private static final int[] RETRY_TIMES_MS = {5000, 15000, 30000};
-    private static final boolean DEBUG = false;
 
     // Welbeing contract
     private static final String PATH_ACTIONS = "actions";
@@ -154,9 +153,6 @@ public final class WellbeingModel extends BgObjectWithLooper {
         Preconditions.assertUIThread();
         // Work profile apps are not recognized by digital wellbeing.
         if (userId != UserHandle.myUserId()) {
-            if (DEBUG || mIsInTest) {
-                Log.d(TAG, "getShortcutForApp [" + packageName + "]: not current user");
-            }
             return null;
         }
 
@@ -164,15 +160,7 @@ public final class WellbeingModel extends BgObjectWithLooper {
             String actionId = mPackageToActionId.get(packageName);
             final RemoteAction action = actionId != null ? mActionIdMap.get(actionId) : null;
             if (action == null) {
-                if (DEBUG || mIsInTest) {
-                    Log.d(TAG, "getShortcutForApp [" + packageName + "]: no action");
-                }
                 return null;
-            }
-            if (DEBUG || mIsInTest) {
-                Log.d(TAG,
-                        "getShortcutForApp [" + packageName + "]: action: '" + action.getTitle()
-                                + "'");
             }
             return new RemoteActionShortcut(action, activity, info, originalView);
         }
@@ -189,10 +177,6 @@ public final class WellbeingModel extends BgObjectWithLooper {
         if (packageNames.length == 0) {
             return true;
         }
-        if (DEBUG || mIsInTest) {
-            Log.d(TAG, "retrieveActions() called with: packageNames = [" + String.join(", ",
-                    packageNames) + "]");
-        }
         Preconditions.assertNonUiThread();
 
         Uri contentUri = apiBuilder().build();
@@ -200,7 +184,6 @@ public final class WellbeingModel extends BgObjectWithLooper {
         try (ContentProviderClient client = mContext.getContentResolver()
                 .acquireUnstableContentProviderClient(contentUri)) {
             if (client == null) {
-                if (DEBUG || mIsInTest) Log.i(TAG, "retrieveActions(): null provider");
                 return false;
             }
 
@@ -227,10 +210,6 @@ public final class WellbeingModel extends BgObjectWithLooper {
 
                     final String[] packagesForAction =
                             actionBundle.getStringArray(EXTRA_PACKAGES);
-                    if (DEBUG || mIsInTest) {
-                        Log.d(TAG, "....actionId: " + actionId + ", packages: " + String.join(", ",
-                                packagesForAction));
-                    }
                     for (String packageName : packagesForAction) {
                         mPackageToActionId.put(packageName, actionId);
                     }
@@ -244,17 +223,11 @@ public final class WellbeingModel extends BgObjectWithLooper {
             if (mIsInTest) throw new RuntimeException(e);
             return true;
         }
-        if (DEBUG || mIsInTest) Log.i(TAG, "retrieveActions(): finished");
         return true;
     }
 
     @WorkerThread
     private void updateActionsWithRetry(int retryCount, @Nullable String packageName) {
-        if (DEBUG || mIsInTest) {
-            Log.i(TAG,
-                    "updateActionsWithRetry(); retryCount: " + retryCount + ", package: "
-                            + packageName);
-        }
         String[] packageNames = TextUtils.isEmpty(packageName)
                 ? mContext.getSystemService(LauncherApps.class)
                 .getActivityList(null, Process.myUserHandle()).stream()
@@ -272,7 +245,6 @@ public final class WellbeingModel extends BgObjectWithLooper {
         }
         mWorkerHandler.postDelayed(
                 () -> {
-                    if (DEBUG || mIsInTest) Log.i(TAG, "Retrying; attempt " + (retryCount + 1));
                     updateActionsWithRetry(retryCount + 1, packageName);
                 },
                 packageName, RETRY_TIMES_MS[retryCount]);
@@ -280,13 +252,11 @@ public final class WellbeingModel extends BgObjectWithLooper {
 
     @WorkerThread
     private void updateAllPackages() {
-        if (DEBUG || mIsInTest) Log.i(TAG, "updateAllPackages");
         updateActionsWithRetry(0, null);
     }
 
     @WorkerThread
     private void onAppPackageChanged(Intent intent) {
-        if (DEBUG || mIsInTest) Log.d(TAG, "Changes in apps: intent = [" + intent + "]");
         Preconditions.assertNonUiThread();
 
         final String packageName = intent.getData().getSchemeSpecificPart();

@@ -39,7 +39,6 @@ import com.android.wm.shell.desktopmode.IDesktopTaskListener;
 public class DesktopVisibilityController {
 
     private static final String TAG = "DesktopVisController";
-    private static final boolean DEBUG = false;
     private static final boolean IS_STASHING_ENABLED = SystemProperties.getBoolean(
             "persist.wm.debug.desktop_stashing", false);
     private final Launcher mLauncher;
@@ -65,9 +64,6 @@ public class DesktopVisibilityController {
             public void onVisibilityChanged(int displayId, boolean visible) {
                 MAIN_EXECUTOR.execute(() -> {
                     if (displayId == mLauncher.getDisplayId()) {
-                        if (DEBUG) {
-                            Log.d(TAG, "desktop visibility changed value=" + visible);
-                        }
                         setFreeformTasksVisible(visible);
                     }
                 });
@@ -80,9 +76,6 @@ public class DesktopVisibilityController {
                 }
                 MAIN_EXECUTOR.execute(() -> {
                     if (displayId == mLauncher.getDisplayId()) {
-                        if (DEBUG) {
-                            Log.d(TAG, "desktop stashed changed value=" + stashed);
-                        }
                         if (stashed) {
                             showSelectAppToast();
                         } else {
@@ -121,9 +114,6 @@ public class DesktopVisibilityController {
      * Sets whether freeform windows are visible and updates launcher visibility based on that.
      */
     public void setFreeformTasksVisible(boolean freeformTasksVisible) {
-        if (DEBUG) {
-            Log.d(TAG, "setFreeformTasksVisible: visible=" + freeformTasksVisible);
-        }
         if (!isDesktopModeSupported()) {
             return;
         }
@@ -150,9 +140,6 @@ public class DesktopVisibilityController {
      * Sets whether the overview is visible and updates launcher visibility based on that.
      */
     public void setOverviewStateEnabled(boolean overviewStateEnabled) {
-        if (DEBUG) {
-            Log.d(TAG, "setOverviewStateEnabled: enabled=" + overviewStateEnabled);
-        }
         if (!isDesktopModeSupported()) {
             return;
         }
@@ -202,9 +189,6 @@ public class DesktopVisibilityController {
     }
 
     private void setRecentsGestureInProgress(boolean gestureInProgress) {
-        if (DEBUG) {
-            Log.d(TAG, "setGestureInProgress: inProgress=" + gestureInProgress);
-        }
         if (gestureInProgress != mGestureInProgress) {
             mGestureInProgress = gestureInProgress;
         }
@@ -220,9 +204,6 @@ public class DesktopVisibilityController {
     }
 
     private void setLauncherViewsVisibility(int visibility) {
-        if (DEBUG) {
-            Log.d(TAG, "setLauncherViewsVisibility: visibility=" + visibility);
-        }
         View workspaceView = mLauncher.getWorkspace();
         if (workspaceView != null) {
             workspaceView.setVisibility(visibility);
@@ -234,9 +215,6 @@ public class DesktopVisibilityController {
     }
 
     private void markLauncherPaused() {
-        if (DEBUG) {
-            Log.d(TAG, "markLauncherPaused");
-        }
         StatefulActivity<LauncherState> activity =
                 QuickstepLauncher.ACTIVITY_TRACKER.getCreatedActivity();
         if (activity != null) {
@@ -245,9 +223,6 @@ public class DesktopVisibilityController {
     }
 
     private void markLauncherResumed() {
-        if (DEBUG) {
-            Log.d(TAG, "markLauncherResumed");
-        }
         StatefulActivity<LauncherState> activity =
                 QuickstepLauncher.ACTIVITY_TRACKER.getCreatedActivity();
         // Check activity state before calling setResumed(). Launcher may have been actually
@@ -262,9 +237,6 @@ public class DesktopVisibilityController {
         if (mSelectAppToast != null) {
             return;
         }
-        if (DEBUG) {
-            Log.d(TAG, "show toast to select desktop apps");
-        }
         Runnable onCloseCallback = () -> {
             SystemUiProxy.INSTANCE.get(mLauncher).hideStashedDesktopApps(mLauncher.getDisplayId());
         };
@@ -274,9 +246,6 @@ public class DesktopVisibilityController {
     private void hideSelectAppToast() {
         if (mSelectAppToast == null) {
             return;
-        }
-        if (DEBUG) {
-            Log.d(TAG, "hide toast to select desktop apps");
         }
         mSelectAppToast.hide();
         mSelectAppToast = null;

@@ -120,7 +120,6 @@ public class Folder extends AbstractFloatingView implements ClipPathView, DragSo
         View.OnLongClickListener, DropTarget, FolderListener, TextView.OnEditorActionListener,
         View.OnFocusChangeListener, DragListener, ExtendedEditText.OnBackKeyListener {
     private static final String TAG = "Launcher.Folder";
-    private static final boolean DEBUG = false;
 
     /**
      * Used for separating folder title when logging together.
@@ -379,9 +378,6 @@ public class Folder extends AbstractFloatingView implements ClipPathView, DragSo
         // Convert to a string here to ensure that no other state associated with the text field
         // gets saved.
         String newTitle = mFolderName.getText().toString();
-        if (DEBUG) {
-            Log.d(TAG, "onBackKey newTitle=" + newTitle);
-        }
         mInfo.setTitle(newTitle, mLauncherDelegate.getModelWriter());
         mFolderIcon.onTitleChanged(newTitle);
 
@@ -406,10 +402,6 @@ public class Folder extends AbstractFloatingView implements ClipPathView, DragSo
     }
 
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (DEBUG) {
-            Log.d(TAG, "onEditorAction actionId=" + actionId + " key="
-                    + (event != null ? event.getKeyCode() : "null event"));
-        }
         if (actionId == EditorInfo.IME_ACTION_DONE) {
             mFolderName.dispatchBackKey();
             return true;

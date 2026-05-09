@@ -40,7 +40,6 @@ public class WidgetsSearchBarController implements TextWatcher,
         SearchCallback<WidgetsListBaseEntry>,  ExtendedEditText.OnBackKeyListener,
         View.OnKeyListener {
     private static final String TAG = "WidgetsSearchBarController";
-    private static final boolean DEBUG = false;
 
     protected SearchAlgorithm<WidgetsListBaseEntry> mSearchAlgorithm;
     protected ExtendedEditText mInput;
@@ -88,9 +87,6 @@ public class WidgetsSearchBarController implements TextWatcher,
 
     @Override
     public void onSearchResult(String query, ArrayList<WidgetsListBaseEntry> items) {
-        if (DEBUG) {
-            Log.d(TAG, "onSearchResult query: " + query + " items: " + items);
-        }
         mSearchModeListener.onSearchResults(items);
     }
 

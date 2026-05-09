@@ -79,7 +79,6 @@ import java.util.StringJoiner;
  */
 public class TaskbarManager {
     private static final String TAG = "TaskbarManager";
-    private static final boolean DEBUG = false;
 
     /**
      * All the configurations which do not initiate taskbar recreation.
@@ -467,10 +466,6 @@ public class TaskbarManager {
     }
 
     public void onSystemUiFlagsChanged(int systemUiStateFlags) {
-        if (DEBUG) {
-            Log.d(TAG, "SysUI flags changed: " + formatFlagChange(systemUiStateFlags,
-                    mSharedState.sysuiStateFlags, QuickStepContract::getSystemUiStateString));
-        }
         mSharedState.sysuiStateFlags = systemUiStateFlags;
         if (mTaskbarActivityContext != null) {
             mTaskbarActivityContext.updateSysuiStateFlags(systemUiStateFlags, false /* fromInit */);

@@ -90,7 +90,6 @@ import java.util.concurrent.Executors;
 public class BubbleBarController extends IBubblesListener.Stub {
 
     private static final String TAG = BubbleBarController.class.getSimpleName();
-    private static final boolean DEBUG = false;
 
     // Whether bubbles are showing in the bubble bar from launcher
     public static final boolean BUBBLE_BAR_ENABLED =
@@ -397,7 +396,6 @@ public class BubbleBarController extends IBubblesListener.Stub {
 
     /** Updates the currently selected bubble for launcher views and tells WMShell to show it. */
     public void showAndSelectBubble(BubbleBarItem b) {
-        if (DEBUG) Log.w(TAG, "showingSelectedBubble: " + b.getKey());
         setSelectedBubble(b);
         showSelectedBubble();
     }
@@ -409,7 +407,6 @@ public class BubbleBarController extends IBubblesListener.Stub {
      */
     private void setSelectedBubble(BubbleBarItem b) {
         if (!Objects.equals(b, mSelectedBubble)) {
-            if (DEBUG) Log.w(TAG, "selectingBubble: " + b.getKey());
             mSelectedBubble = b;
             mBubbleBarViewController.updateSelectedBubble(mSelectedBubble);
         }

@@ -231,7 +231,6 @@ public abstract class RecentsView<ACTIVITY_TYPE extends StatefulActivity<STATE_T
         TaskVisualsChangeListener {
 
     private static final String TAG = "RecentsView";
-    private static final boolean DEBUG = false;
 
     public static final FloatProperty<RecentsView> CONTENT_ALPHA =
             new FloatProperty<RecentsView>("contentAlpha") {
@@ -5419,10 +5418,6 @@ public abstract class RecentsView<ACTIVITY_TYPE extends StatefulActivity<STATE_T
     @Override
     protected void updateMinAndMaxScrollX() {
         super.updateMinAndMaxScrollX();
-        if (DEBUG) {
-            Log.d(TAG, "updateMinAndMaxScrollX - mMinScroll: " + mMinScroll);
-            Log.d(TAG, "updateMinAndMaxScrollX - mMaxScroll: " + mMaxScroll);
-        }
     }
 
     @Override
@@ -5521,12 +5516,6 @@ public abstract class RecentsView<ACTIVITY_TYPE extends StatefulActivity<STATE_T
                 pageScrollChanged = true;
                 outPageScrolls[i] = pageScroll;
             }
-            if (DEBUG) {
-                Log.d(TAG, "getPageScrolls - outPageScrolls[" + i + "]: " + outPageScrolls[i]);
-            }
-        }
-        if (DEBUG) {
-            Log.d(TAG, "getPageScrolls - clearAllScroll: " + clearAllScroll);
         }
         return pageScrollChanged;
     }

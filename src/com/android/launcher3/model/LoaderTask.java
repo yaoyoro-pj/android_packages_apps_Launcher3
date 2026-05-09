@@ -115,7 +115,6 @@ import java.util.concurrent.CancellationException;
 public class LoaderTask implements Runnable {
     private static final String TAG = "LoaderTask";
 
-    private static final boolean DEBUG = true;
 
     @NonNull
     protected final LauncherAppState mApp;
@@ -1085,8 +1084,5 @@ public class LoaderTask implements Runnable {
     }
 
     private static void logASplit(String label) {
-        if (DEBUG) {
-            Log.d(TAG, label);
-        }
     }
 }

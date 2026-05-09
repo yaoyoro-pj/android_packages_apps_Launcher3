@@ -33,7 +33,6 @@ import java.lang.IllegalArgumentException;
  */
 public class IconPalette {
 
-    private static final boolean DEBUG = false;
     private static final String TAG = "IconPalette";
 
     private static final float MIN_PRELOAD_COLOR_SATURATION = 0.2f;
@@ -70,16 +69,6 @@ public class IconPalette {
 
         int contrastingColor = ensureTextContrast(resolvedColor, background);
 
-        if (contrastingColor != resolvedColor) {
-            if (DEBUG){
-                Log.w(TAG, String.format(
-                        "Enhanced contrast of notification for %s " +
-                                "%s (over background) by changing #%s to %s",
-                        context.getPackageName(),
-                        contrastChange(resolvedColor, contrastingColor, background),
-                        Integer.toHexString(resolvedColor), Integer.toHexString(contrastingColor)));
-            }
-        }
         return contrastingColor;
     }
 

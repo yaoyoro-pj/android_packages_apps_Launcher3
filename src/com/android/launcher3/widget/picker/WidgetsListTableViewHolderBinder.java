@@ -47,7 +47,6 @@ import java.util.List;
  */
 public final class WidgetsListTableViewHolderBinder
         implements ViewHolderBinder<WidgetsListContentEntry, WidgetsRowViewHolder> {
-    private static final boolean DEBUG = false;
     private static final String TAG = "WidgetsListRowViewHolderBinder";
 
     private final LayoutInflater mLayoutInflater;
@@ -86,10 +85,6 @@ public final class WidgetsListTableViewHolderBinder
         }
 
         WidgetsListTableView table = holder.tableContainer;
-        if (DEBUG) {
-            Log.d(TAG, String.format("onBindViewHolder [widget#=%d, table.getChildCount=%d]",
-                    entry.mWidgets.size(), table.getChildCount()));
-        }
         table.setListDrawableState(
                 WidgetsListDrawableState.obtain(
                         (position & POSITION_FIRST) != 0,

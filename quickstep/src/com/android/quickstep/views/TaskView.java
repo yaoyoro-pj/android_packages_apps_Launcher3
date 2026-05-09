@@ -128,7 +128,6 @@ import java.util.stream.Stream;
 public class TaskView extends FrameLayout implements Reusable {
 
     private static final String TAG = TaskView.class.getSimpleName();
-    private static final boolean DEBUG = false;
 
     private static final RectF EMPTY_RECT_F = new RectF();
 

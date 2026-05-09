@@ -37,7 +37,6 @@ import com.android.launcher3.Utilities;
  */
 public class MultiScalePropertyFactory<T extends View> {
 
-    private static final boolean DEBUG = false;
     private static final String TAG = "MultiScaleProperty";
     private final String mName;
     private final ArrayMap<Integer, MultiScaleProperty> mProperties = new ArrayMap<>();
@@ -94,11 +93,6 @@ public class MultiScalePropertyFactory<T extends View> {
             mValue = newValue;
             apply(obj, mLastAggregatedValue);
 
-            if (DEBUG) {
-                Log.d(TAG, "name=" + mName
-                        + " newValue=" + newValue + " mInx=" + mInx
-                        + " aggregated=" + mLastAggregatedValue + " others= " + mProperties);
-            }
         }
 
         @Override

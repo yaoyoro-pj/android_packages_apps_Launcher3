@@ -55,7 +55,6 @@ import java.util.StringJoiner;
 public abstract class BaseActivity extends Activity implements ActivityContext {
 
     private static final String TAG = "BaseActivity";
-    static final boolean DEBUG = false;
 
     public static final int INVISIBLE_BY_STATE_HANDLER = 1 << 0;
     public static final int INVISIBLE_BY_APP_TRANSITIONS = 1 << 1;
@@ -309,20 +308,12 @@ public abstract class BaseActivity extends Activity implements ActivityContext {
     protected void addActivityFlags(int toAdd) {
         final int oldFlags = mActivityFlags;
         mActivityFlags |= toAdd;
-        if (DEBUG) {
-            Log.d(TAG, "Launcher flags updated: " + formatFlagChange(mActivityFlags, oldFlags,
-                    BaseActivity::getActivityStateString));
-        }
         onActivityFlagsChanged(toAdd);
     }
 
     protected void removeActivityFlags(int toRemove) {
         final int oldFlags = mActivityFlags;
         mActivityFlags &= ~toRemove;
-        if (DEBUG) {
-            Log.d(TAG, "Launcher flags updated: " + formatFlagChange(mActivityFlags, oldFlags,
-                    BaseActivity::getActivityStateString));
-        }
 
         onActivityFlagsChanged(toRemove);
     }

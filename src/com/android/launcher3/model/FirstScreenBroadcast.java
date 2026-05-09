@@ -62,7 +62,6 @@ import java.util.stream.Collectors;
 public class FirstScreenBroadcast {
 
     private static final String TAG = "FirstScreenBroadcast";
-    private static final boolean DEBUG = false;
 
     private static final String ACTION_FIRST_SCREEN_ACTIVE_INSTALLS
             = "com.android.launcher3.action.FIRST_SCREEN_ACTIVE_INSTALLS";
@@ -136,12 +135,6 @@ public class FirstScreenBroadcast {
             }
         }
 
-        if (DEBUG) {
-            printList(installerPackageName, "Folder item", folderItems);
-            printList(installerPackageName, "Workspace item", workspaceItems);
-            printList(installerPackageName, "Hotseat item", hotseatItems);
-            printList(installerPackageName, "Widget item", widgetItems);
-        }
 
         if (folderItems.isEmpty()
                 && workspaceItems.isEmpty()

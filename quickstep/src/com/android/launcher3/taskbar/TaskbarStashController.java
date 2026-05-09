@@ -82,7 +82,6 @@ import java.util.function.IntPredicate;
  */
 public class TaskbarStashController implements TaskbarControllers.LoggableTaskbarController {
     private static final String TAG = TaskbarStashController.class.getSimpleName();
-    private static final boolean DEBUG = false;
 
     public static final int FLAG_IN_APP = 1 << 0;
     public static final int FLAG_STASHED_IN_APP_MANUAL = 1 << 1; // long press, persisted
@@ -1249,14 +1248,6 @@ public class TaskbarStashController implements TaskbarControllers.LoggableTaskba
         public Animator createSetStateAnimator(int flags, long duration) {
             boolean isStashed = mStashCondition.test(flags);
 
-            if (DEBUG) {
-                String stateString = formatFlagChange(flags, mPrevFlags,
-                        TaskbarStashController::getStateString);
-                Log.d(TAG, "createSetStateAnimator: flags: " + stateString
-                        + ", duration: " + duration
-                        + ", isStashed: " + isStashed
-                        + ", mIsStashed: " + mIsStashed);
-            }
 
             int changedFlags = mPrevFlags ^ flags;
             if (mPrevFlags != flags) {

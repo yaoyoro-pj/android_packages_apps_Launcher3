@@ -64,7 +64,6 @@ public class WidgetsModel {
     public static final boolean GO_DISABLE_NOTIFICATION_DOTS = false;
 
     private static final String TAG = "WidgetsModel";
-    private static final boolean DEBUG = false;
 
     /* Map of widgets and shortcuts that are tracked per package. */
     private final Map<PackageItemInfo, List<WidgetItem>> mWidgetsList = new HashMap<>();
@@ -156,9 +155,6 @@ public class WidgetsModel {
 
     private synchronized void setWidgetsAndShortcuts(ArrayList<WidgetItem> rawWidgetsShortcuts,
             LauncherAppState app, @Nullable PackageUserKey packageUser) {
-        if (DEBUG) {
-            Log.d(TAG, "addWidgetsAndShortcuts, widgetsShortcuts#=" + rawWidgetsShortcuts.size());
-        }
 
         // Temporary cache for {@link PackageItemInfos} to avoid having to go through
         // {@link mPackageItemInfos} to locate the key to be used for {@link #mWidgetsList}
@@ -282,19 +278,10 @@ public class WidgetsModel {
 
                 // Ensure that all widgets we show can be added on a workspace of this size
                 if (!item.widgetInfo.isMinSizeFulfilled()) {
-                    if (DEBUG) {
-                        Log.d(TAG, String.format(
-                                "Widget %s : can't fit on this device with a grid size: %dx%d",
-                                item.componentName, mIdp.numColumns, mIdp.numRows));
-                    }
                     return false;
                 }
             }
             if (!mAppFilter.shouldShowApp(item.componentName)) {
-                if (DEBUG) {
-                    Log.d(TAG, String.format("%s is filtered and not added to the widget tray.",
-                            item.componentName));
-                }
                 return false;
             }
 

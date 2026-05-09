@@ -57,7 +57,6 @@ import java.util.List;
  */
 public class RecyclerViewFastScroller extends View {
     private static final String TAG = "RecyclerViewFastScroller";
-    private static final boolean DEBUG = false;
     private static final int FASTSCROLL_THRESHOLD_MILLIS = 40;
     private static final int SCROLL_DELTA_THRESHOLD_DP = 4;
 
@@ -283,13 +282,6 @@ public class RecyclerViewFastScroller extends View {
             case MotionEvent.ACTION_CANCEL:
                 endFastScrolling();
                 break;
-        }
-        if (DEBUG) {
-            Log.d(TAG, (ev.getAction() == MotionEvent.ACTION_DOWN ? "\n" : "")
-                    + "handleTouchEvent " + MotionEvent.actionToString(ev.getAction())
-                    + " (" + x + "," + y + ")" + " isDragging=" + mIsDragging
-                    + " mIgnoreDragGesture=" + mIgnoreDragGesture);
-
         }
         return mIsDragging;
     }

@@ -69,7 +69,6 @@ public class RecentsOrientedState implements
         SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String TAG = "RecentsOrientedState";
-    private static final boolean DEBUG = false;
 
     @Retention(SOURCE)
     @IntDef({ROTATION_0, ROTATION_90, ROTATION_180, ROTATION_270})
@@ -232,9 +231,6 @@ public class RecentsOrientedState implements
             mOrientationHandler = PagedOrientationHandler.SEASCAPE;
         } else {
             mOrientationHandler = PagedOrientationHandler.PORTRAIT;
-        }
-        if (DEBUG) {
-            Log.d(TAG, "current RecentsOrientedState: " + this);
         }
 
         int oldStateId = mStateId;

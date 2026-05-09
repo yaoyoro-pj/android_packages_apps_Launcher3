@@ -82,7 +82,6 @@ public class DesktopTaskView extends TaskView {
 
     private static final String TAG = DesktopTaskView.class.getSimpleName();
 
-    private static final boolean DEBUG = false;
 
     @NonNull
     private List<Task> mTasks = new ArrayList<>();
@@ -164,14 +163,6 @@ public class DesktopTaskView extends TaskView {
      * Updates this desktop task to the gives task list defined in {@code tasks}
      */
     public void bind(List<Task> tasks, RecentsOrientedState orientedState) {
-        if (DEBUG) {
-            StringBuilder sb = new StringBuilder();
-            sb.append("bind tasks=").append(tasks.size()).append("\n");
-            for (Task task : tasks) {
-                sb.append(" key=").append(task.key).append("\n");
-            }
-            Log.d(TAG, sb.toString());
-        }
         cancelPendingLoadTasks();
 
         mTasks = new ArrayList<>(tasks);
@@ -434,12 +425,6 @@ public class DesktopTaskView extends TaskView {
         float scaleWidth = containerWidth / (float) windowWidth;
         float scaleHeight = containerHeight / (float) windowHeight;
 
-        if (DEBUG) {
-            Log.d(TAG,
-                    "onMeasure: container=[" + containerWidth + "," + containerHeight + "] window=["
-                            + windowWidth + "," + windowHeight + "] scale=[" + scaleWidth + ","
-                            + scaleHeight + "]");
-        }
 
         // Desktop tile is a shrunk down version of launcher and freeform task thumbnails.
         for (int i = 0; i < mTasks.size(); i++) {
@@ -470,10 +455,6 @@ public class DesktopTaskView extends TaskView {
                 thumbnailView.setX(taskX);
                 thumbnailView.setY(taskY);
 
-                if (DEBUG) {
-                    Log.d(TAG, "onMeasure: task=" + task.key + " thumb=[" + thumbWidth + ","
-                            + thumbHeight + "]" + " pos=[" + taskX + "," + taskY + "]");
-                }
             }
         }
     }

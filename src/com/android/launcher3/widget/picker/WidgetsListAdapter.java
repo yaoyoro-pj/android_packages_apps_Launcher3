@@ -76,7 +76,6 @@ import java.util.stream.IntStream;
 public class WidgetsListAdapter extends Adapter<ViewHolder> implements OnHeaderClickListener {
 
     private static final String TAG = "WidgetsListAdapter";
-    private static final boolean DEBUG = false;
 
     /** Uniquely identifies widgets list view type within the app. */
     public static final int VIEW_TYPE_WIDGETS_SPACE = R.id.view_type_widgets_space;

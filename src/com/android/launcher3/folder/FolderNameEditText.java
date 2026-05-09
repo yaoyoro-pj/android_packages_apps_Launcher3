@@ -37,7 +37,6 @@ import java.util.List;
  */
 public class FolderNameEditText extends ExtendedEditText {
     private static final String TAG = "FolderNameEditText";
-    private static final boolean DEBUG = false;
 
     private boolean mEnteredCompose = false;
 
@@ -88,10 +87,6 @@ public class FolderNameEditText extends ExtendedEditText {
         if (start == 0 && count == 0 && before > 0) {
             reason = "suggestion was rejected";
             mEnteredCompose = true;
-        }
-        if (DEBUG) {
-            Log.d(TAG, "onTextChanged " + start + "," + before + "," + count
-                    + ", " + reason);
         }
     }
 

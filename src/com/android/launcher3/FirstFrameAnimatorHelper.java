@@ -32,7 +32,6 @@ import android.view.ViewTreeObserver.OnDrawListener;
 public class FirstFrameAnimatorHelper implements OnDrawListener, OnAttachStateChangeListener {
 
     private static final String TAG = "FirstFrameAnimatorHlpr";
-    private static final boolean DEBUG = false;
     private static final int MAX_DELAY = 1000;
 
     private View mRootView;
@@ -120,12 +119,10 @@ public class FirstFrameAnimatorHelper implements OnDrawListener, OnAttachStateCh
                         if (frameNum > 1) {
                             mRootView.post(() -> animation.removeUpdateListener(this));
                         }
-                        if (DEBUG) print(animation);
                     }
                 }
                 mHandlingOnAnimationUpdate = false;
             } else {
-                if (DEBUG) print(animation);
             }
         }
 

@@ -57,7 +57,6 @@ import java.util.stream.Collectors;
 public class FolderNameProvider implements ResourceBasedOverride {
 
     private static final String TAG = "FolderNameProvider";
-    private static final boolean DEBUG = false;
 
     /**
      * IME usually has up to 3 suggest slots. In total, there are 4 suggest slots as the folder
@@ -108,9 +107,6 @@ public class FolderNameProvider implements ResourceBasedOverride {
             ArrayList<WorkspaceItemInfo> workspaceItemInfos,
             FolderNameInfos nameInfos) {
         Preconditions.assertWorkerThread();
-        if (DEBUG) {
-            Log.d(TAG, "getSuggestedFolderName:" + nameInfos.toString());
-        }
 
         // A shallow copy tring to avoid ConcurrentModificationException
         final ArrayList<WorkspaceItemInfo> candidates = new ArrayList<>(workspaceItemInfos);
@@ -134,9 +130,6 @@ public class FolderNameProvider implements ResourceBasedOverride {
             // Place it as first viable suggestion and shift everything else
             info.ifPresent(i -> setAsFirstSuggestion(
                     nameInfos, i.title == null ? "" : i.title.toString()));
-        }
-        if (DEBUG) {
-            Log.d(TAG, "getSuggestedFolderName:" + nameInfos.toString());
         }
     }
 

@@ -54,7 +54,6 @@ import java.util.List;
  */
 public class AllAppsRecyclerView extends FastScrollRecyclerView {
     protected static final String TAG = "AllAppsRecyclerView";
-    private static final boolean DEBUG = false;
     private static final boolean DEBUG_LATENCY = Utilities.isPropertyEnabled(SEARCH_LOGGING);
 
     protected final int mNumAppsPerRow;
@@ -115,9 +114,6 @@ public class AllAppsRecyclerView extends FastScrollRecyclerView {
 
     @Override
     public void onDraw(Canvas c) {
-        if (DEBUG) {
-            Log.d(TAG, "onDraw at = " + System.currentTimeMillis());
-        }
         if (DEBUG_LATENCY) {
             Log.d(SEARCH_LOGGING,  getClass().getSimpleName() + " onDraw; time stamp = "
                     + System.currentTimeMillis());

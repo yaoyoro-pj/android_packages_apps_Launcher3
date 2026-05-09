@@ -53,7 +53,6 @@ import java.util.Map;
 class OrientationTouchTransformer {
 
     private static final String TAG = "OrientationTouchTransformer";
-    private static final boolean DEBUG = false;
 
     private static final int QUICKSTEP_ROTATION_UNINITIALIZED = -1;
 
@@ -120,9 +119,6 @@ class OrientationTouchTransformer {
     }
 
     void setNavigationMode(NavigationMode newMode, Info info, Resources newRes) {
-        if (enableLog()) {
-            Log.d(TAG, "setNavigationMode new: " + newMode + " oldMode: " + mMode + " " + this);
-        }
         if (mMode == newMode) {
             return;
         }
@@ -207,9 +203,6 @@ class OrientationTouchTransformer {
      * Ok to call multiple times.
      */
     private void resetSwipeRegions(Info region) {
-        if (enableLog()) {
-            Log.d(TAG, "clearing all regions except rotation: " + mCachedDisplayInfo.rotation);
-        }
 
         mCachedDisplayInfo = new CachedDisplayInfo(region.currentSize, region.rotation);
         OrientationRectF regionToKeep = mSwipeTouchRegions.get(mCachedDisplayInfo);
@@ -231,12 +224,6 @@ class OrientationTouchTransformer {
     }
 
     private OrientationRectF createRegionForDisplay(Info display) {
-        if (enableLog()) {
-            Log.d(TAG, "creating rotation region for: " + mCachedDisplayInfo.rotation
-            + " with mode: " + mMode + " displayRotation: " + display.rotation +
-                    " displaySize: " + display.currentSize +
-                    " navBarHeight: " + mNavBarGesturalHeight);
-        }
 
         Point size = display.currentSize;
         int rotation = display.rotation;
@@ -299,9 +286,6 @@ class OrientationTouchTransformer {
     }
 
     boolean touchInValidSwipeRegions(float x, float y) {
-        if (enableLog()) {
-            Log.d(TAG, "touchInValidSwipeRegions " + x + "," + y + " in " + mLastRectTouched);
-        }
         if (mLastRectTouched != null) {
             return mLastRectTouched.contains(x, y);
         }
@@ -359,17 +343,11 @@ class OrientationTouchTransformer {
             }
             case ACTION_POINTER_DOWN:
             case ACTION_DOWN: {
-                if (enableLog()) {
-                    Log.d(TAG, "ACTION_DOWN mLastRectTouched: " + mLastRectTouched);
-                }
                 if (mLastRectTouched != null) {
                     return;
                 }
 
                 for (OrientationRectF rect : mSwipeTouchRegions.values()) {
-                    if (enableLog()) {
-                        Log.d(TAG, "ACTION_DOWN rect: " + rect);
-                    }
                     if (rect == null) {
                         continue;
                     }
@@ -384,19 +362,12 @@ class OrientationTouchTransformer {
                             mQuickStepStartingRotation = mLastRectTouched.getRotation();
                             resetSwipeRegions();
                         }
-                        if (enableLog()) {
-                            Log.d(TAG, "set active region: " + rect);
-                        }
                         return;
                     }
                 }
                 break;
             }
         }
-    }
-
-    private boolean enableLog() {
-        return DEBUG || TestProtocol.sDebugTracing;
     }
 
     public void dump(PrintWriter pw) {

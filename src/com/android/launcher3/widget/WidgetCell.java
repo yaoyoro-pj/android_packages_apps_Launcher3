@@ -66,7 +66,6 @@ import java.util.function.Consumer;
 public class WidgetCell extends LinearLayout {
 
     private static final String TAG = "WidgetCell";
-    private static final boolean DEBUG = false;
 
     private static final int FADE_IN_DURATION_MS = 90;
 
@@ -151,9 +150,6 @@ public class WidgetCell extends LinearLayout {
      * Called to clear the view and free attached resources. (e.g., {@link Bitmap}
      */
     public void clear() {
-        if (DEBUG) {
-            Log.d(TAG, "reset called on:" + mWidgetName.getText());
-        }
         mWidgetImage.animate().cancel();
         mWidgetImage.setDrawable(null);
         mWidgetImage.setVisibility(View.VISIBLE);
