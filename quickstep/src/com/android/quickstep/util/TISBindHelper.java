@@ -73,7 +73,6 @@ public class TISBindHelper implements ServiceConnection {
             return;
         }
 
-        Log.d(TAG, "TIS service connected");
         mIsConnected = true;
         mBinder = (TISBinder) iBinder;
         mConnectionCallback.accept(mBinder);
@@ -87,7 +86,6 @@ public class TISBindHelper implements ServiceConnection {
 
     @Override
     public void onServiceDisconnected(ComponentName componentName) {
-        Log.d(TAG, "TIS service disconnected");
         mBinder = null;
         mIsConnected = false;
     }

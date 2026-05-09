@@ -218,9 +218,6 @@ public class QuickstepModelDelegate extends ModelDelegate {
         if (now - lastSnapshotTimeMillis < DAY_IN_MILLIS) {
             if (IS_DEBUG) {
                 String elapsedTime = formatElapsedTime((now - lastSnapshotTimeMillis) / 1000);
-                Log.d(TAG, String.format(
-                        "Skipped snapshot logging since previous snapshot was %s old.",
-                        elapsedTime));
             }
         } else {
             IntSparseArrayMap<ItemInfo> itemsIdMap;
@@ -250,7 +247,6 @@ public class QuickstepModelDelegate extends ModelDelegate {
      */
     protected void registerSnapshotLoggingCallback() {
         if (mStatsManager == null) {
-            Log.d(TAG, "Failed to get StatsManager");
         }
 
         try {
@@ -268,21 +264,15 @@ public class QuickstepModelDelegate extends ModelDelegate {
                         for (ItemInfo info : itemsIdMap) {
                             FolderInfo parent = getContainer(info, itemsIdMap);
                             LauncherAtom.ItemInfo itemInfo = info.buildProto(parent);
-                            Log.d(TAG, itemInfo.toString());
                             StatsEvent statsEvent = StatsLogCompatManager.buildStatsEvent(itemInfo,
                                     instanceId);
                             eventList.add(statsEvent);
                         }
-                        Log.d(TAG,
-                                String.format(
-                                        "Successfully logged %d workspace items with instanceId=%d",
-                                        itemsIdMap.size(), instanceId.getId()));
                         additionalSnapshotEvents(instanceId);
                         SettingsChangeLogger.INSTANCE.get(mContext).logSnapshot(instanceId);
                         return StatsManager.PULL_SUCCESS;
                     }
             );
-            Log.d(TAG, "Successfully registered for launcher snapshot logging!");
         } catch (RuntimeException e) {
             Log.e(TAG, "Failed to register launcher snapshot logging callback with StatsManager",
                     e);
@@ -432,8 +422,6 @@ public class QuickstepModelDelegate extends ModelDelegate {
         }
         if (state.predictor != null) {
             state.predictor.notifyAppTargetEvent(event);
-            Log.d(TAG, "notifyAppTargetEvent action=" + event.getAction()
-                    + " launchLocation=" + event.getLaunchLocation());
             if (state == mHotseatState
                     && (event.getAction() == AppTargetEvent.ACTION_PIN
                             || event.getAction() == AppTargetEvent.ACTION_UNPIN)) {

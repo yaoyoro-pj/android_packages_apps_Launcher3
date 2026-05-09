@@ -33,7 +33,6 @@ public class AppWidgetsRestoredReceiver extends BroadcastReceiver {
     public void onReceive(final Context context, Intent intent) {
         if (AppWidgetManager.ACTION_APPWIDGET_HOST_RESTORED.equals(intent.getAction())) {
             int hostId = intent.getIntExtra(AppWidgetManager.EXTRA_HOST_ID, 0);
-            Log.d(TAG, "Widget ID map received for host:" + hostId);
             if (hostId != LauncherWidgetHolder.APPWIDGET_HOST_ID) {
                 return;
             }
@@ -64,7 +63,6 @@ public class AppWidgetsRestoredReceiver extends BroadcastReceiver {
             // modifications of the DB.
             Log.e(TAG, "Skipping widget ID remap as DB already in use");
             for (int widgetId : newWidgetIds) {
-                Log.d(TAG, "Deleting widgetId: " + widgetId);
                 host.deleteAppWidgetId(widgetId);
             }
             return;
@@ -72,9 +70,6 @@ public class AppWidgetsRestoredReceiver extends BroadcastReceiver {
 
         final AppWidgetManager widgets = AppWidgetManager.getInstance(context);
 
-        Log.d(TAG, "restoreAppWidgetIds: "
-                + "oldWidgetIds=" + IntArray.wrap(oldWidgetIds).toConcatString()
-                + ", newWidgetIds=" + IntArray.wrap(newWidgetIds).toConcatString());
 
         // TODO(b/234700507): Remove the logs after the bug is fixed
         logDatabaseWidgetInfo(controller);
@@ -100,8 +95,6 @@ public class AppWidgetsRestoredReceiver extends BroadcastReceiver {
             final String where = "appWidgetId=? and (restored & 1) = 1 and profileId=?";
             String profileId = Long.toString(mainProfileId);
             final String[] args = new String[] { oldWidgetId, profileId };
-            Log.d(TAG, "restoreAppWidgetIds: querying profile id=" + profileId
-                    + " with controller profile ID=" + controllerProfileId);
             int result = new ContentWriter(context,
                             new ContentWriter.CommitParams(controller, where, args))
                     .put(LauncherSettings.Favorites.APPWIDGET_ID, newWidgetIds[i])
@@ -117,8 +110,6 @@ public class AppWidgetsRestoredReceiver extends BroadcastReceiver {
                         "appWidgetId=?", new String[]{oldWidgetId}, null, null, null)) {
                     if (!cursor.moveToFirst()) {
                         // The widget no long exists.
-                        Log.d(TAG, "Deleting widgetId: " + newWidgetIds[i] + " with old id: "
-                                + oldWidgetId);
                         host.deleteAppWidgetId(newWidgetIds[i]);
                     }
                 }
@@ -168,8 +159,6 @@ public class AppWidgetsRestoredReceiver extends BroadcastReceiver {
                         .append("]");
             }
             builder.append("]");
-            Log.d(TAG, "restoreAppWidgetIds: all widget ids in database: "
-                    + builder.toString());
         } catch (Exception ex) {
             Log.e(TAG, "Getting widget ids from the database failed", ex);
         }

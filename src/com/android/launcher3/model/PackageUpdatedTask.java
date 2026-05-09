@@ -145,7 +145,6 @@ public class PackageUpdatedTask extends BaseModelUpdateTask {
                 break;
             case OP_REMOVE: {
                 for (int i = 0; i < N; i++) {
-                    FileLog.d(TAG, "Removing app icon" + packages[i]);
                     iconCache.removeIconsForPkg(packages[i], mUser);
                 }
                 // Fall through

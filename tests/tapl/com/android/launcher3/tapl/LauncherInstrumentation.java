@@ -425,7 +425,6 @@ public final class LauncherInstrumentation {
     }
 
     static void log(String message) {
-        Log.d(TAG, message);
     }
 
     Closable addContextLayer(String piece) {
@@ -580,7 +579,6 @@ public final class LauncherInstrumentation {
                         + systemHealth + "\n>>>>>>>>>>>>>>>>>>";
             }
         }
-        Log.d(TAG, "About to throw the error: " + message, new Exception());
         return message;
     }
 
@@ -2005,7 +2003,6 @@ public final class LauncherInstrumentation {
         if (mEventChecker != null) {
             mEventChecker.expectPattern(sequence, expected);
         } else {
-            Log.d(TAG, "Expecting: " + sequence + " / " + expected);
         }
     }
 
@@ -2026,7 +2023,6 @@ public final class LauncherInstrumentation {
         final float tmpBuffer = 100f;
         final Resources resources = getResources();
         if (!supportsRoundedCornersOnWindows(resources)) {
-            Log.d(TAG, "No rounded corners");
             return tmpBuffer;
         }
 
@@ -2045,7 +2041,6 @@ public final class LauncherInstrumentation {
 
         // Always use the smallest radius to make sure the rounded corners will
         // completely cover the display.
-        Log.d(TAG, "Rounded corners top: " + topRadius + " bottom: " + bottomRadius);
         return Math.max(topRadius, bottomRadius) + tmpBuffer;
     }
 

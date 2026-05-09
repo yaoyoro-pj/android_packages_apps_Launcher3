@@ -33,8 +33,6 @@ public final class TestLogging {
     public static boolean sHadEventsNotFromTest;
 
     private static void recordEventSlow(String sequence, String event, boolean reportToTapl) {
-        Log.d(reportToTapl ? TAPL_EVENTS_TAG : LAUNCHER_EVENTS_TAG,
-                sequence + " / " + event);
         final BiConsumer<String, String> eventConsumer = sEventConsumer;
         if (reportToTapl && eventConsumer != null) {
             eventConsumer.accept(sequence, event);
@@ -56,7 +54,6 @@ public final class TestLogging {
     private static void registerEventNotFromTest(InputEvent event) {
         if (!sHadEventsNotFromTest && event.getDeviceId() != -1) {
             sHadEventsNotFromTest = true;
-            Log.d(TestProtocol.PERMANENT_DIAG_TAG, "First event not from test: " + event);
         }
     }
 

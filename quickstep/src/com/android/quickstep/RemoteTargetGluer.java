@@ -121,9 +121,7 @@ public class RemoteTargetGluer {
         long appCount = Arrays.stream(targets.apps)
                 .filter(app -> app.mode == targets.targetMode)
                 .count();
-        Log.d(TAG, "appCount: " + appCount + " handleLength: " + mRemoteTargetHandles.length);
         if (appCount < mRemoteTargetHandles.length) {
-            Log.d(TAG, "resizing handles");
             RemoteTargetHandle[] newHandles = new RemoteTargetHandle[(int) appCount];
             System.arraycopy(mRemoteTargetHandles, 0/*src*/, newHandles, 0/*dst*/, (int) appCount);
             mRemoteTargetHandles = newHandles;
@@ -133,8 +131,6 @@ public class RemoteTargetGluer {
                 .anyMatch(remoteAnimationTarget ->
                         remoteAnimationTarget.windowConfiguration.getWindowingMode()
                                 == WindowConfiguration.WINDOWING_MODE_MULTI_WINDOW);
-        Log.d(TAG, "containsSplitTargets? " + containsSplitTargets + " handleLength: " +
-                mRemoteTargetHandles.length + " appsLength: " + targets.apps.length);
 
         if (mRemoteTargetHandles.length == 1) {
             // Single fullscreen app

@@ -196,7 +196,6 @@ public class MotionPauseDetector {
             mIsPaused = isPaused;
             String logString = "onMotionPauseChanged, paused=" + mIsPaused + " reason=" + reason;
             if (Utilities.isRunningInTestHarness()) {
-                Log.d(TAG, logString);
             }
             ActiveGestureLog.INSTANCE.addLog(logString);
             boolean isFirstDetectedPause = !mHasEverBeenPaused && mIsPaused;

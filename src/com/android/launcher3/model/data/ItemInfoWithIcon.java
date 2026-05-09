@@ -193,9 +193,6 @@ public abstract class ItemInfoWithIcon extends ItemInfo {
         setProgressLevel(installInfo.progress, installInfo.state);
 
         if (installInfo.state == PackageInstallInfo.STATUS_FAILED) {
-            FileLog.d(TAG,
-                    "Icon info: " + this + " marked broken with install info: " + installInfo,
-                    new Exception());
         }
     }
 

@@ -64,7 +64,6 @@ public class TaskRestartedDuringLaunchListener implements TaskStackChangeListene
     public void onActivityRestartAttempt(ActivityManager.RunningTaskInfo task,
             boolean homeTaskVisible, boolean clearedTask, boolean wasVisible) {
         if (wasVisible) {
-            Log.d(TAG, "Detected activity restart during launch for task=" + task.taskId);
             mTaskRestartedCallback.run();
             unregister();
         }

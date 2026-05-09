@@ -1835,11 +1835,6 @@ public abstract class RecentsView<ACTIVITY_TYPE extends StatefulActivity<STATE_T
             runOnPageScrollsInitialized(() -> {
                 // TODO(b/246283207): Remove logging once root cause of flake detected.
                 if (Utilities.isRunningInTestHarness()) {
-                    Log.d("b/246283207", "RecentsView#applyLoadPlan() -> "
-                            + "previousCurrentPage: " + previousCurrentPage
-                            + ", targetPage: " + finalTargetPage
-                            + ", getScrollForPage(targetPage): "
-                            + getScrollForPage(finalTargetPage));
                 }
                 setCurrentPage(finalTargetPage);
             });
@@ -5329,8 +5324,6 @@ public abstract class RecentsView<ACTIVITY_TYPE extends StatefulActivity<STATE_T
         cleanupRemoteTargets();
 
         if (mRecentsAnimationController == null) {
-            Log.d(TestProtocol.INCORRECT_HOME_STATE, "finish recents animation but recents "
-                    + "animation controller was null. returning.");
             if (onFinishComplete != null) {
                 onFinishComplete.run();
             }

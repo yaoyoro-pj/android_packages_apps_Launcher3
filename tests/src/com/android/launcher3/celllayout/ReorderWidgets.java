@@ -97,8 +97,6 @@ public class ReorderWidgets extends AbstractLauncherUiTest {
         InvariantDeviceProfile idp = InvariantDeviceProfile.INSTANCE.get(mTargetContext);
         ArrayList<CellLayoutBoard> boards = workspaceToBoards();
         for (int i = 0; i < boards.size(); i++) {
-            Log.d(TAG, "Screen number " + i);
-            Log.d(TAG, ".\n" + boards.get(i).toString(idp.numColumns, idp.numRows));
         }
     }
 
@@ -186,10 +184,7 @@ public class ReorderWidgets extends AbstractLauncherUiTest {
      */
     private boolean runTestCaseMap(Map<Point, ReorderTestCase> testCaseMap, String testName) {
         Point iconGridDimensions = mLauncher.getWorkspace().getIconGridDimensions();
-        Log.d(TAG, "Running test " + testName + " for grid " + iconGridDimensions);
         if (!testCaseMap.containsKey(iconGridDimensions)) {
-            Log.d(TAG, "The test " + testName + " doesn't support " + iconGridDimensions
-                    + " grid layout");
             return false;
         }
         runTestCase(testCaseMap.get(iconGridDimensions));

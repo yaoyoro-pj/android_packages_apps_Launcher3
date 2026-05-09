@@ -603,8 +603,6 @@ public class TaplTestsLauncher3 extends AbstractLauncherUiTest {
             initialize(this, true);
             endTime = SystemClock.uptimeMillis();
             elapsedTime = endTime - startTime;
-            Log.d("testDragAppIconToWorkspaceCellTime",
-                    "Milliseconds taken to drag app icon to workspace cell: " + elapsedTime);
         }
 
         // test to move a shortcut to other cell.
@@ -614,8 +612,6 @@ public class TaplTestsLauncher3 extends AbstractLauncherUiTest {
             launcherTestAppIcon.dragToWorkspace(target.x, target.y);
             endTime = SystemClock.uptimeMillis();
             elapsedTime = endTime - startTime;
-            Log.d("testDragAppIconToWorkspaceCellTime",
-                    "Milliseconds taken to move shortcut to other cell: " + elapsedTime);
         }
     }
 
@@ -631,7 +627,6 @@ public class TaplTestsLauncher3 extends AbstractLauncherUiTest {
         for (Point p : gridPositions) {
             sb.append(p).append(", ");
         }
-        Log.d(ICON_MISSING, "allGridPositions: " + sb);
         createShortcutIfNotExist(STORE_APP_NAME, gridPositions[0]);
         createShortcutIfNotExist(MAPS_APP_NAME, gridPositions[1]);
         installDummyAppAndWaitForUIUpdate();

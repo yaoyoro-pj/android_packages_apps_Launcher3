@@ -44,12 +44,10 @@ public class TISBindRule implements TestRule {
         return new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                Log.d(TAG, "Connected to TouchInteractionService");
             }
 
             @Override
             public void onServiceDisconnected(ComponentName componentName) {
-                Log.d(TAG, "Disconnected from TouchInteractionService");
             }
         };
     }

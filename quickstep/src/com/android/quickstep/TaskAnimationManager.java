@@ -182,9 +182,6 @@ public class TaskAnimationManager implements RecentsAnimationCallbacks.RecentsAn
                         RecentsView recentsView =
                                 activityInterface.getCreatedActivity().getOverviewPanel();
                         if (recentsView != null) {
-                            Log.d(TestProtocol.INCORRECT_HOME_STATE,
-                                    "finish recents animation on "
-                                            + compat.taskInfo.description);
                             recentsView.finishRecentsAnimation(true, null);
                         }
                         return;

@@ -192,13 +192,7 @@ public class ItemInstallQueue {
         MODEL_EXECUTOR.post(() -> {
             Pair<ItemInfo, Object> itemInfo = info.getItemInfo(mContext);
             if (itemInfo == null) {
-                FileLog.d(LOG,
-                        "Adding PendingInstallShortcutInfo with no attached info to queue.",
-                        stackTrace);
             } else {
-                Log.d(LOG,
-                        "Adding PendingInstallShortcutInfo to queue. Attached info: "
-                                + itemInfo.first);
             }
 
             addToQueue(info);

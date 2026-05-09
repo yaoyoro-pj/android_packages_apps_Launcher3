@@ -160,9 +160,6 @@ public class TaskbarDragController extends DragController<BaseTaskbarContext> im
         }
         TestLogging.recordEvent(TestProtocol.SEQUENCE_MAIN, "onTaskbarItemLongClick");
         if (TestProtocol.sDebugTracing) {
-            Log.d(TestProtocol.TWO_TASKBAR_LONG_CLICKS,
-                    "TaskbarDragController.startDragOnLongClick",
-                    new Throwable());
         }
         BubbleTextView btv = (BubbleTextView) view;
         mActivity.onDragStart();
@@ -351,8 +348,6 @@ public class TaskbarDragController extends DragController<BaseTaskbarContext> im
                 if (iconSize > 0) {
                     shadowSize.set(iconSize, iconSize);
                 } else {
-                    Log.d(TAG, "Invalid icon size, dragSize=" + mDragIconSize
-                            + " viewWidth=" + btv.getWidth());
                 }
 
                 // The registration point was taken before the icon scaled to mDragIconSize, so
@@ -364,9 +359,6 @@ public class TaskbarDragController extends DragController<BaseTaskbarContext> im
                 if (touchX >= 0 && touchY >= 0) {
                     shadowTouchPoint.set(touchX, touchY);
                 } else {
-                    Log.d(TAG, "Invalid touch point, "
-                            + "registrationXY=(" + mRegistrationX + ", " + mRegistrationY + ") "
-                            + "offsetXY=(" + offsetX + ", " + offsetY + ")");
                 }
             }
 

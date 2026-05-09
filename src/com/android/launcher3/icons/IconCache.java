@@ -155,7 +155,6 @@ public class IconCache extends BaseIconCache {
                         false /*replace existing*/);
             }
         } catch (NameNotFoundException e) {
-            Log.d(TAG, "Package not found", e);
         }
     }
 
@@ -440,7 +439,6 @@ public class IconCache extends BaseIconCache {
                 }
             }
         } catch (SQLiteException e) {
-            Log.d(TAG, "Error reading icon cache", e);
         } finally {
             Trace.endSection();
         }

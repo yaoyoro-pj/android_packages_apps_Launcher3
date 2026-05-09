@@ -92,10 +92,6 @@ public final class RecentsViewStateController extends
             mRecentsView.updateEmptyMessage();
             // TODO(b/246283207): Remove logging once root cause of flake detected.
             if (Utilities.isRunningInTestHarness()) {
-                Log.d("b/246283207", "RecentsView#setStateWithAnimationInternal getCurrentPage(): "
-                                + mRecentsView.getCurrentPage()
-                                + ", getScrollForPage(getCurrentPage())): "
-                                + mRecentsView.getScrollForPage(mRecentsView.getCurrentPage()));
             }
         } else {
             builder.addListener(

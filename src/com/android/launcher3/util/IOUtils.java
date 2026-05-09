@@ -70,7 +70,6 @@ public class IOUtils {
                 c.close();
             } catch (IOException e) {
                 if (FeatureFlags.IS_STUDIO_BUILD) {
-                    Log.d(TAG, "Error closing", e);
                 }
             }
         }

@@ -87,7 +87,6 @@ public class TestStabilityRule implements TestRule {
         final String flavorOverride = InstrumentationRegistry.getArguments().getString("flavor");
 
         if (flavorOverride != null) {
-            Log.d(TAG, "Flavor override: " + flavorOverride);
             try {
                 return (int) TestStabilityRule.class.getField(flavorOverride).get(null);
             } catch (NoSuchFieldException e) {
@@ -101,7 +100,6 @@ public class TestStabilityRule implements TestRule {
         try {
             final String launcherPackageName = UiDevice.getInstance(getInstrumentation())
                     .getLauncherPackageName();
-            Log.d(TAG, "Launcher package: " + launcherPackageName);
 
             launcherVersion = getInstrumentation().
                     getContext().
@@ -114,7 +112,6 @@ public class TestStabilityRule implements TestRule {
 
         final String platformVersion = Build.VERSION.INCREMENTAL;
 
-        Log.d(TAG, "Launcher: " + launcherVersion + ", platform: " + platformVersion);
 
         final Matcher launcherBuildMatcher = LAUNCHER_BUILD.matcher(launcherVersion);
         if (!launcherBuildMatcher.find()) {
@@ -129,16 +126,13 @@ public class TestStabilityRule implements TestRule {
         if (launcherBuildMatcher.group("local") != null && (
                 platformBuildMatcher.group("commandLine") != null ||
                         platformBuildMatcher.group("postsubmit") != null)) {
-            Log.d(TAG, "LOCAL RUN");
             sRunFlavor = LOCAL;
         } else if (launcherBuildMatcher.group("platform") != null
                 && platformBuildMatcher.group("presubmit") != null) {
-            Log.d(TAG, "PLATFORM PRESUBMIT");
             sRunFlavor = PLATFORM_PRESUBMIT;
         } else if (launcherBuildMatcher.group("platform") != null
                 && (platformBuildMatcher.group("postsubmit") != null
                 || platformBuildMatcher.group("commandLine") != null)) {
-            Log.d(TAG, "PLATFORM POSTSUBMIT");
             sRunFlavor = PLATFORM_POSTSUBMIT;
         } else {
             throw new AssertionError("Unrecognized run flavor");

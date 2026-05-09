@@ -266,7 +266,6 @@ public class DefaultLayoutParser extends AutoInstallsLayout {
                 try {
                     mPackageManager.getReceiverInfo(cn, 0);
                 } catch (Exception e1) {
-                    Log.d(TAG, "Can't find widget provider: " + cn.getClassName());
                     return -1;
                 }
             }

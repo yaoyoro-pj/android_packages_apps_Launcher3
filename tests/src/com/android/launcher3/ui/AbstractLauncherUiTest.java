@@ -147,8 +147,6 @@ public abstract class AbstractLauncherUiTest {
                     device.executeShellCommand(
                             "am dumpheap " + device.getLauncherPackageName() + " " + fileName);
                 }
-                Log.d(TAG, "Saved leak dump, the leak is still present: "
-                        + !launcher.noLeakedActivities());
                 sDumpWasGenerated = true;
                 result = "saved memory dump as an artifact";
             } catch (Throwable e) {
@@ -607,8 +605,6 @@ public abstract class AbstractLauncherUiTest {
 
     protected HomeAppIcon createShortcutIfNotExist(String name, int cellX, int cellY) {
         HomeAppIcon homeAppIcon = mLauncher.getWorkspace().tryGetWorkspaceAppIcon(name);
-        Log.d(ICON_MISSING, "homeAppIcon: " + homeAppIcon + " name: " + name +
-                " cell: " + cellX + ", " + cellY);
         if (homeAppIcon == null) {
             HomeAllApps allApps = mLauncher.getWorkspace().switchToAllApps();
             allApps.freeze();

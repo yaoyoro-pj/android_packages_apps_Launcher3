@@ -214,8 +214,6 @@ public class InstallSessionHelper {
         if (SessionCommitReceiver.isEnabled(mAppContext)
                 && verifySessionInfo(sessionInfo)
                 && !promiseIconAddedForId(sessionInfo.getSessionId())) {
-            FileLog.d(LOG, "Adding package name to install queue: "
-                    + sessionInfo.getAppPackageName());
 
             ItemInstallQueue.INSTANCE.get(mAppContext)
                     .queueItem(sessionInfo.getAppPackageName(), getUserHandle(sessionInfo));

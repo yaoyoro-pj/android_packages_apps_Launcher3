@@ -171,6 +171,5 @@ public final class TestProtocol {
         if (!sDebugTracing) {
             return;
         }
-        Log.d(tag, message);
     }
 }

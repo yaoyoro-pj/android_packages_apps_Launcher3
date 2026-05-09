@@ -125,10 +125,8 @@ public class AssistContentRequester {
                     requester.executeOnMainExecutor(
                             () -> callback.onAssistContentAvailable(content));
                 } else {
-                    Log.d(TAG, "Callback received after calling UI was disposed of");
                 }
             } else {
-                Log.d(TAG, "Callback received after Requester was collected");
             }
         }
 

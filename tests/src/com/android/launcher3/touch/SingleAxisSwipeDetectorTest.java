@@ -53,7 +53,6 @@ public class SingleAxisSwipeDetectorTest {
 
     private static final String TAG = SingleAxisSwipeDetectorTest.class.getSimpleName();
     public static void L(String s, Object... parts) {
-        Log.d(TAG, (parts.length == 0) ? s : String.format(s, parts));
     }
 
     private TouchEventGenerator mGenerator;

@@ -105,7 +105,6 @@ public class NavigationModeSwitchRule implements TestRule {
                         Log.e(TAG, "Error", e);
                         throw e;
                     } finally {
-                        Log.d(TAG, "In Finally block");
                         assertTrue(mLauncher, "Couldn't set overlay",
                                 setActiveOverlay(mLauncher, prevOverlayPkg, originalMode,
                                         description), description);
@@ -149,11 +148,9 @@ public class NavigationModeSwitchRule implements TestRule {
             LauncherInstrumentation.NavigationModel expectedMode, Description description)
             throws Exception {
         if (!packageExists(overlayPackage)) {
-            Log.d(TAG, "setActiveOverlay: " + overlayPackage + " pkg does not exist");
             return false;
         }
 
-        Log.d(TAG, "setActiveOverlay: " + overlayPackage + "...");
         UiDevice.getInstance(getInstrumentation()).executeShellCommand(
                 "cmd overlay enable-exclusive --category " + overlayPackage);
 

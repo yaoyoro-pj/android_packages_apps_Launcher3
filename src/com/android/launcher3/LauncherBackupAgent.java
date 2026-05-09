@@ -34,7 +34,6 @@ public class LauncherBackupAgent extends BackupAgent {
         // Remove old files which might contain obsolete attributes like idp_grid_name in shared
         // preference that will obstruct backup's attribute from writing to shared preferences.
         if (destination.delete()) {
-            FileLog.d(TAG, "onRestoreFile: Removed obsolete file " + destination);
         }
         super.onRestoreFile(data, size, destination, type, mode, mtime);
     }
@@ -47,7 +46,6 @@ public class LauncherBackupAgent extends BackupAgent {
 
     @Override
     public void onRestoreFinished() {
-        FileLog.d(TAG, "onRestoreFinished: set pending for RestoreDbTask");
         RestoreDbTask.setPending(this);
     }
 }

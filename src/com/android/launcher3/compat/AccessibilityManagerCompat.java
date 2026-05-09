@@ -71,7 +71,6 @@ public class AccessibilityManagerCompat {
 
         sendEventToTest(
                 accessibilityManager, context, TestProtocol.SWITCHED_TO_STATE_MESSAGE, parcel);
-        Log.d(TestProtocol.PERMANENT_DIAG_TAG, "sendStateEventToTest: " + stateOrdinal);
     }
 
     public static void sendScrollFinishedEventToTest(Context context) {

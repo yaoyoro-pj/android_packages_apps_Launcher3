@@ -491,7 +491,6 @@ public class TouchInteractionService extends Service {
     }
 
     private void disposeEventHandlers(String reason) {
-        Log.d(TAG, "disposeEventHandlers: Reason: " + reason);
         if (mInputEventReceiver != null) {
             mInputEventReceiver.dispose();
             mInputEventReceiver = null;
@@ -650,7 +649,6 @@ public class TouchInteractionService extends Service {
 
     @Override
     public void onDestroy() {
-        Log.d(TAG, "Touch service destroyed: user=" + getUserId());
         sIsInitialized = false;
         if (LockedUserState.get(this).isUserUnlocked()) {
             mInputConsumer.unregisterInputConsumer();
@@ -670,7 +668,6 @@ public class TouchInteractionService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d(TAG, "Touch service connected: user=" + getUserId());
         return mTISBinder;
     }
 

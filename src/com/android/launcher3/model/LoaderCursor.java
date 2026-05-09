@@ -324,13 +324,11 @@ public class LoaderCursor extends CursorWrapper {
     public WorkspaceItemInfo getAppShortcutInfo(
             Intent intent, boolean allowMissingTarget, boolean useLowResIcon, boolean loadIcon) {
         if (user == null) {
-            Log.d(TAG, "Null user found in getShortcutInfo");
             return null;
         }
 
         ComponentName componentName = intent.getComponent();
         if (componentName == null) {
-            Log.d(TAG, "Missing component found in getShortcutInfo");
             return null;
         }
 
@@ -340,7 +338,6 @@ public class LoaderCursor extends CursorWrapper {
         mActivityInfo = mContext.getSystemService(LauncherApps.class)
                 .resolveActivity(newIntent, user);
         if ((mActivityInfo == null) && !allowMissingTarget) {
-            Log.d(TAG, "Missing activity found in getShortcutInfo: " + componentName);
             return null;
         }
 

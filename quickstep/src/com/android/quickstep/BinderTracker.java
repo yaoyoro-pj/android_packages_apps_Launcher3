@@ -147,7 +147,6 @@ public class BinderTracker {
                 mUnexpectedTransactionCallback.accept(new BinderCallSite(
                         mMainThreadTraceStack.peekLast(), descriptor, transactionCode));
             } else {
-                Log.d(TAG, "MainThread-IPC " + descriptor + " ignored due to " + ipcBypass);
             }
             return null;
         }

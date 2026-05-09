@@ -261,7 +261,6 @@ public class ModelDbController {
      */
     public void tryMigrateDB() {
         if (!migrateGridIfNeeded()) {
-            Log.d(TAG, "Migration failed: resetting launcher database");
             createEmptyDB();
             LauncherPrefs.get(mContext).putSync(
                     getEmptyDbCreatedKey(mOpenHelper.getDatabaseName()).to(true));
@@ -368,7 +367,6 @@ public class ModelDbController {
         createDbIfNotExists();
 
         if (LauncherPrefs.get(mContext).get(getEmptyDbCreatedKey())) {
-            Log.d(TAG, "loading default workspace");
 
             LauncherWidgetHolder widgetHolder = mOpenHelper.newLauncherWidgetHolder();
             try {
@@ -445,7 +443,6 @@ public class ModelDbController {
         }
         Uri uri = getLayoutUri(authority, mContext);
         try (InputStream in = cr.openInputStream(uri)) {
-            Log.d(TAG, "Loading layout from " + authority);
 
             Resources res = pm.getResourcesForApplication(pi.applicationInfo);
             return getAutoInstallsLayoutFromIS(in, widgetHolder, SourceResources.wrap(res));

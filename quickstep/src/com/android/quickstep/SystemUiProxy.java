@@ -1376,7 +1376,6 @@ public class SystemUiProxy implements ISystemUiProxy, NavHandle {
             return;
         }
         try {
-            Log.d(TAG, "Registering unfold animation receiver");
             mUnfoldAnimation.setListener(callback);
         } catch (RemoteException e) {
             Log.e(TAG, "Failed call setUnfoldAnimationListener", e);

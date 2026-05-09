@@ -766,10 +766,6 @@ public abstract class PagedView<T extends View & PageIndicator> extends ViewGrou
         if (mScroller.isFinished() && pageScrollChanged) {
             // TODO(b/246283207): Remove logging once root cause of flake detected.
             if (Utilities.isRunningInTestHarness() && !(this instanceof Workspace)) {
-                Log.d("b/246283207", this.getClass().getSimpleName() + "#onLayout() -> "
-                        + "if(mScroller.isFinished() && pageScrollChanged) -> getNextPage(): "
-                        + getNextPage() + ", getScrollForPage(getNextPage()): "
-                        + getScrollForPage(getNextPage()));
             }
             setCurrentPage(getNextPage());
         }
@@ -1377,8 +1373,6 @@ public abstract class PagedView<T extends View & PageIndicator> extends ViewGrou
                 boolean isDeltaLeft = mIsRtl ? delta > 0 : delta < 0;
                 boolean isVelocityLeft = mIsRtl ? velocity > 0 : velocity < 0;
                 if (DEBUG_FAILED_QUICKSWITCH && !isFling && mAllowEasyFling) {
-                    Log.d("Quickswitch", "isFling=false vel=" + velocity
-                            + " threshold=" + mEasyFlingThresholdVelocity);
                 }
 
                 if (!mFreeScroll) {

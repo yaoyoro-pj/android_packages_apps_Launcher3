@@ -495,7 +495,6 @@ public final class Utilities {
                 return value;
             }
         } catch (Exception e) {
-            Log.d(TAG, "Unable to read system properties");
         }
         return defaultValue;
     }
@@ -764,10 +763,6 @@ public final class Utilities {
     public static void logMatrix(String label, Matrix matrix) {
         float[] matrixValues = new float[9];
         matrix.getValues(matrixValues);
-        Log.d(label, String.format("%s: %s\nscale (x,y) = (%f, %f)\ntranslate (x,y) = (%f, %f)",
-                label, matrix, matrixValues[Matrix.MSCALE_X], matrixValues[Matrix.MSCALE_Y],
-                matrixValues[Matrix.MTRANS_X], matrixValues[Matrix.MTRANS_Y]
-        ));
     }
 
     /**

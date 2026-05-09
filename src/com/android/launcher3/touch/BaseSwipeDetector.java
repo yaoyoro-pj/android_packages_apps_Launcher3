@@ -90,8 +90,6 @@ public abstract class BaseSwipeDetector {
         float travelDistance = Math.max(0.2f, progressNeeded);
         long duration = (long) Math.max(100, ANIMATION_DURATION / velocityDivisor * travelDistance);
         if (DBG) {
-            Log.d(TAG, String.format(
-                    "calculateDuration=%d, v=%f, d=%f", duration, velocity, progressNeeded));
         }
         return duration;
     }
@@ -215,7 +213,6 @@ public abstract class BaseSwipeDetector {
         mIsSettingState = true;
 
         if (DBG) {
-            Log.d(TAG, "setState:" + mState + "->" + newState);
         }
         // onDragStart and onDragEnd is reported ONLY on state transition
         if (newState == ScrollState.DRAGGING) {
@@ -251,7 +248,6 @@ public abstract class BaseSwipeDetector {
     private void reportDragStart(boolean recatch) {
         reportDragStartInternal(recatch);
         if (DBG) {
-            Log.d(TAG, "onDragStart recatch:" + recatch);
         }
     }
 
@@ -260,7 +256,6 @@ public abstract class BaseSwipeDetector {
     private void reportDragging(MotionEvent event) {
         if (mDisplacement != mLastDisplacement) {
             if (DBG) {
-                Log.d(TAG, String.format("onDrag disp=%s", mDisplacement));
             }
 
             mLastDisplacement.set(mDisplacement);
@@ -280,8 +275,6 @@ public abstract class BaseSwipeDetector {
             velocity.x = -velocity.x;
         }
         if (DBG) {
-            Log.d(TAG, String.format("onScrollEnd disp=%.1s, velocity=%.1s",
-                    mDisplacement, velocity));
         }
 
         reportDragEndInternal(velocity);

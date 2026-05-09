@@ -47,7 +47,6 @@ public class TestViewHelpers {
             Instrumentation i = getInstrumentation();
             ComponentName cn = new ComponentName(i.getContext(),
                     hasConfigureScreen ? AppWidgetWithConfig.class : AppWidgetNoConfig.class);
-            Log.d(TAG, "findWidgetProvider componentName=" + cn.flattenToString());
             return new WidgetManagerHelper(i.getTargetContext()).findProvider(cn, myUserHandle());
         });
         if (info == null) {

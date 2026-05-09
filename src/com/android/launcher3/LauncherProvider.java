@@ -61,7 +61,6 @@ public class LauncherProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         if (FeatureFlags.IS_STUDIO_BUILD) {
-            Log.d(TAG, "Launcher process started");
         }
 
         // The content provider exists for the entire duration of the launcher main process and

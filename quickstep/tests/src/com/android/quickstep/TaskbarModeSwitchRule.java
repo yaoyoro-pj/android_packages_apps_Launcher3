@@ -90,7 +90,6 @@ public class TaskbarModeSwitchRule implements TestRule {
                         Log.e(TAG, "Error", e);
                         throw e;
                     } finally {
-                        Log.d(TAG, "In Finally block");
                         setTaskbarMode(mLauncher, wasTransientTaskbarMode, description);
                     }
                 }

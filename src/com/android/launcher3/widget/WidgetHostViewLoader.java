@@ -48,7 +48,6 @@ public class WidgetHostViewLoader implements DragController.DragListener {
     @Override
     public void onDragEnd() {
         if (LOGD) {
-            Log.d(TAG, "Cleaning up in onDragEnd()...");
         }
 
         // Cleanup up preloading state.
@@ -66,7 +65,6 @@ public class WidgetHostViewLoader implements DragController.DragListener {
         // The widget was inflated and added to the DragLayer -- remove it.
         if (mInfo.boundWidget != null) {
             if (LOGD) {
-                Log.d(TAG, "...removing widget from drag layer");
             }
             mLauncher.getDragLayer().removeView(mInfo.boundWidget);
             mLauncher.getAppWidgetHolder().deleteAppWidgetId(mInfo.boundWidget.getAppWidgetId());
@@ -96,7 +94,6 @@ public class WidgetHostViewLoader implements DragController.DragListener {
             public void run() {
                 mWidgetLoadingId = mLauncher.getAppWidgetHolder().allocateAppWidgetId();
                 if (LOGD) {
-                    Log.d(TAG, "Binding widget, id: " + mWidgetLoadingId);
                 }
                 if (new WidgetManagerHelper(mLauncher).bindAppWidgetIdIfAllowed(
                         mWidgetLoadingId, pInfo, options)) {
@@ -111,7 +108,6 @@ public class WidgetHostViewLoader implements DragController.DragListener {
             @Override
             public void run() {
                 if (LOGD) {
-                    Log.d(TAG, "Inflating widget, id: " + mWidgetLoadingId);
                 }
                 if (mWidgetLoadingId == -1) {
                     return;
@@ -133,7 +129,6 @@ public class WidgetHostViewLoader implements DragController.DragListener {
                 lp.customPosition = true;
                 hostView.setLayoutParams(lp);
                 if (LOGD) {
-                    Log.d(TAG, "Adding host view to drag layer");
                 }
                 mLauncher.getDragLayer().addView(hostView);
                 mView.setTag(mInfo);
@@ -141,7 +136,6 @@ public class WidgetHostViewLoader implements DragController.DragListener {
         };
 
         if (LOGD) {
-            Log.d(TAG, "About to bind/inflate widget");
         }
         mHandler.post(mBindWidgetRunnable);
         return true;

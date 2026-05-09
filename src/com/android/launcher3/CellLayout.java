@@ -780,7 +780,6 @@ public class CellLayout extends ViewGroup {
 
             child.setId(childId);
             if (LOGD) {
-                Log.d(TAG, "Adding view to ShortcutsAndWidgetsContainer: " + child);
             }
             mShortcutsAndWidgets.addView(child, index, lp);
 

@@ -203,7 +203,6 @@ public class WorkProfileTest extends AbstractLauncherUiTest {
     }
 
     private void updateWorkProfileSetupSuccessful(String cli, String output) {
-        Log.d(TAG, "updateWorkProfileSetupSuccessful, cli=" + cli + " " + "output=" + output);
         if (output.startsWith("Success")) {
             assertTrue(output, output.startsWith("Success"));
             mWorkProfileSetupSuccessful = true;

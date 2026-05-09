@@ -46,9 +46,6 @@ public final class AppShareabilityJobService extends JobService {
 
     @Override
     public boolean onStopJob(final JobParameters params) {
-        Log.d(TAG, "App shareability data update job stopped; id=" + params.getJobId()
-                + ", reason="
-                + JobParameters.getInternalReasonCodeDescription(params.getStopReason()));
         return true; // Reschedule the job
     }
 

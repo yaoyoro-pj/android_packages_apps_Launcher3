@@ -128,9 +128,6 @@ public class FirstFrameAnimatorHelper implements OnDrawListener, OnAttachStateCh
 
         public void print(ValueAnimator animation) {
             float flatFraction = animation.getCurrentPlayTime() / (float) animation.getDuration();
-            Log.d(TAG, mGlobalFrameCount +
-                    "(" + (mGlobalFrameCount - mStartFrame) + ") " + mRootView + " dirty? " +
-                    mRootView.isDirty() + " " + flatFraction + " " + this + " " + animation);
         }
     }
 }

@@ -115,8 +115,6 @@ public class AllAppsRecyclerView extends FastScrollRecyclerView {
     @Override
     public void onDraw(Canvas c) {
         if (DEBUG_LATENCY) {
-            Log.d(SEARCH_LOGGING,  getClass().getSimpleName() + " onDraw; time stamp = "
-                    + System.currentTimeMillis());
         }
         super.onDraw(c);
     }

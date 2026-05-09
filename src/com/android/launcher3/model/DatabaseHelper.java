@@ -103,7 +103,6 @@ public class DatabaseHelper extends NoLocaleSQLiteHelper implements
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        if (LOGD) Log.d(TAG, "creating new launcher database");
 
         mMaxItemId = 1;
 
@@ -157,7 +156,6 @@ public class DatabaseHelper extends NoLocaleSQLiteHelper implements
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (LOGD) {
-            Log.d(TAG, "onUpgrade triggered: " + oldVersion);
         }
         switch (oldVersion) {
             // The version cannot be lower that 12, as Launcher3 never supported a lower
@@ -259,7 +257,6 @@ public class DatabaseHelper extends NoLocaleSQLiteHelper implements
             case 30: {
                 if (FeatureFlags.QSB_ON_FIRST_SCREEN) {
                     // Clean up first row in screen 0 as it might contain junk data.
-                    Log.d(TAG, "Cleaning up first row");
                     db.delete(Favorites.TABLE_NAME,
                             String.format(Locale.ENGLISH,
                                     "%1$s = %2$d AND %3$s = %4$d AND %5$s = %6$d",
@@ -290,8 +287,6 @@ public class DatabaseHelper extends NoLocaleSQLiteHelper implements
             DbDowngradeHelper.parse(mContext.getFileStreamPath(DOWNGRADE_SCHEMA_FILE))
                     .onDowngrade(db, oldVersion, newVersion);
         } catch (Exception e) {
-            Log.d(TAG, "Unable to downgrade from: " + oldVersion + " to " + newVersion
-                    + ". Wiping database.", e);
             createEmptyDB(db);
         }
     }
@@ -332,7 +327,6 @@ public class DatabaseHelper extends NoLocaleSQLiteHelper implements
             for (int widgetId : allWidgets) {
                 if (!validWidgets.contains(widgetId)) {
                     try {
-                        FileLog.d(TAG, "Deleting invalid widget " + widgetId);
                         holder.deleteAppWidgetId(widgetId);
                         isAnyWidgetRemoved = true;
                     } catch (RuntimeException e) {
@@ -346,10 +340,6 @@ public class DatabaseHelper extends NoLocaleSQLiteHelper implements
                 final String validWidgetsIds = Arrays.stream(
                                 validWidgets.getArray().toArray()).mapToObj(String::valueOf)
                         .collect(Collectors.joining(",", "[", "]"));
-                FileLog.d(TAG,
-                        "One or more widgets was removed. db_path=" + db.getPath()
-                                + " allWidgetsIds=" + allWidgetsIds
-                                + ", validWidgetsIds=" + validWidgetsIds);
             }
         } finally {
             holder.destroy();

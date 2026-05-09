@@ -70,23 +70,10 @@ public class SessionCommitReceiver extends BroadcastReceiver {
         if (TextUtils.isEmpty(info.getAppPackageName())
                 || info.getInstallReason() != PackageManager.INSTALL_REASON_USER
                 || alreadyAddedPromiseIcon) {
-            FileLog.d(LOG,
-                    String.format(Locale.ENGLISH,
-                            "Removing PromiseIcon for package: %s, install reason: %d,"
-                            + " alreadyAddedPromiseIcon: %s",
-                    info.getAppPackageName(),
-                    info.getInstallReason(),
-                    alreadyAddedPromiseIcon
-                )
-            );
             packageInstallerCompat.removePromiseIconId(info.getSessionId());
             return;
         }
 
-        FileLog.d(LOG,
-                "Adding package name to install queue. Package name: " + info.getAppPackageName()
-                        + ", has app icon: " + (info.getAppIcon() != null)
-                        + ", has app label: " + !TextUtils.isEmpty(info.getAppLabel()));
 
         ItemInstallQueue.INSTANCE.get(context)
                 .queueItem(info.getAppPackageName(), user);

@@ -133,7 +133,6 @@ public class StatsLogCompatManager extends StatsLogManager {
     @WorkerThread
     public static void writeSnapshot(LauncherAtom.ItemInfo info, InstanceId instanceId) {
         if (IS_VERBOSE) {
-            Log.d(TAG, String.format("\nwriteSnapshot(%d):\n%s", instanceId.getId(), info));
         }
         if (!Utilities.ATLEAST_R || Utilities.isRunningInTestHarness()) {
             return;
@@ -445,7 +444,6 @@ public class StatsLogCompatManager extends StatsLogManager {
                 if (!TextUtils.isEmpty(packageName)) {
                     logStringBuilder.append(String.format("\nPackage name: %s", packageName));
                 }
-                Log.d(TAG, logStringBuilder.toString());
             }
 
             for (StatsLogConsumer consumer : LOGS_CONSUMER) {
@@ -553,7 +551,6 @@ public class StatsLogCompatManager extends StatsLogManager {
                 StringBuilder logStringBuilder = new StringBuilder("\n");
                 logStringBuilder.append(String.format("InstanceId:%s ", mInstanceId));
                 logStringBuilder.append(String.format("%s=%sms", name, mLatencyInMillis));
-                Log.d(LATENCY_TAG, logStringBuilder.toString());
             }
 
             SysUiStatsLog.write(SysUiStatsLog.LAUNCHER_LATENCY,
@@ -642,7 +639,6 @@ public class StatsLogCompatManager extends StatsLogManager {
                         mResultType,
                         mAboveKeyboard, mUid, mResultSource));
 
-                Log.d(IMPRESSION_TAG, logStringBuilder.toString());
             }
 
 

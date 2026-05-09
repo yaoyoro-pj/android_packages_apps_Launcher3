@@ -75,7 +75,6 @@ public abstract class BaseModelUpdateTask implements ModelUpdateTask {
         boolean isModelLoaded = Objects.requireNonNull(mModel).isModelLoaded();
         if (!isModelLoaded) {
             if (DEBUG_TASKS) {
-                Log.d(TAG, "Ignoring model task since loader is pending=" + this);
             }
             // Loader has not yet run.
             return;

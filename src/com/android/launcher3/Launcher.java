@@ -1657,7 +1657,6 @@ public class Launcher extends StatefulActivity<LauncherState>
     @Override
     protected void onNewIntent(Intent intent) {
         if (Utilities.isRunningInTestHarness()) {
-            Log.d(TestProtocol.PERMANENT_DIAG_TAG, "Launcher.onNewIntent: " + intent);
         }
         TraceHelper.INSTANCE.beginSection(ON_NEW_INTENT_EVT);
         super.onNewIntent(intent);
@@ -1911,7 +1910,6 @@ public class Launcher extends StatefulActivity<LauncherState>
     void addAppWidgetFromDropImpl(int appWidgetId, ItemInfo info, AppWidgetHostView boundWidget,
             WidgetAddFlowHandler addFlowHandler) {
         if (LOGD) {
-            Log.d(TAG, "Adding widget from drop");
         }
         addAppWidgetImpl(appWidgetId, info, boundWidget, addFlowHandler, 0);
     }
@@ -1976,7 +1974,6 @@ public class Launcher extends StatefulActivity<LauncherState>
         if (hostView != null) {
             // In the case where we've prebound the widget, we remove it from the DragLayer
             if (LOGD) {
-                Log.d(TAG, "Removing widget view from drag layer and setting boundWidget to null");
             }
             getDragLayer().removeView(hostView);
 
@@ -3251,7 +3248,6 @@ public class Launcher extends StatefulActivity<LauncherState>
                 // Setting the touch point to (-1, -1) will show the options popup in the center of
                 // the screen.
                 if (Utilities.isRunningInTestHarness()) {
-                    Log.d(TestProtocol.PERMANENT_DIAG_TAG, "Opening options popup on key up");
                 }
                 showDefaultOptions(-1, -1);
             }

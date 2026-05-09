@@ -200,7 +200,6 @@ public class LauncherModel extends LauncherApps.Callback implements InstallSessi
     public void onPackagesRemoved(
             @NonNull final UserHandle user, @NonNull final String... packages) {
         int op = PackageUpdatedTask.OP_REMOVE;
-        FileLog.d(TAG, "package removed received " + TextUtils.join(",", packages));
         enqueueModelUpdateTask(new PackageUpdatedTask(op, user, packages));
     }
 
@@ -289,7 +288,6 @@ public class LauncherModel extends LauncherApps.Callback implements InstallSessi
     }
 
     public void onBroadcastIntent(@NonNull final Intent intent) {
-        if (DEBUG_RECEIVER || sDebugTracing) Log.d(TAG, "onReceive intent=" + intent);
         final String action = intent.getAction();
         if (Intent.ACTION_LOCALE_CHANGED.equals(action)) {
             // If we have changed locale we need to clear out the labels in all apps/workspace.

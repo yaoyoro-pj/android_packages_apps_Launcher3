@@ -100,8 +100,6 @@ public class AutoInstallsLayout {
 
         // Try with only grid size
         if (layoutId == 0) {
-            Log.d(TAG, "Formatted layout: " + layoutName
-                    + " not found. Trying layout without hosteat");
             layoutName = String.format(Locale.ENGLISH, FORMATTED_LAYOUT_RES,
                     grid.numColumns, grid.numRows);
             layoutId = partner.getXmlResId(layoutName);
@@ -109,7 +107,6 @@ public class AutoInstallsLayout {
 
         // Try the default layout
         if (layoutId == 0) {
-            Log.d(TAG, "Formatted layout: " + layoutName + " not found. Trying the default layout");
             layoutId = partner.getXmlResId(LAYOUT_RES);
         }
 
@@ -287,7 +284,6 @@ public class AutoInstallsLayout {
 
         TagParser tagParser = tagParserMap.get(parser.getName());
         if (tagParser == null) {
-            if (LOGD) Log.d(TAG, "Ignoring unknown element tag: " + parser.getName());
             return 0;
         }
         int newElementId = tagParser.parseAndAdd(parser);
@@ -415,7 +411,6 @@ public class AutoInstallsLayout {
             final String packageName = getAttributeValue(parser, ATTR_PACKAGE_NAME);
             final String className = getAttributeValue(parser, ATTR_CLASS_NAME);
             if (TextUtils.isEmpty(packageName) || TextUtils.isEmpty(className)) {
-                if (LOGD) Log.d(TAG, "Skipping invalid <favorite> with no component");
                 return -1;
             }
 
@@ -481,7 +476,6 @@ public class AutoInstallsLayout {
                 throws XmlPullParserException, IOException {
             ComponentName cn = getComponentName(parser);
             if (cn == null) {
-                if (LOGD) Log.d(TAG, "Skipping invalid <appwidget> with no component");
                 return -1;
             }
 

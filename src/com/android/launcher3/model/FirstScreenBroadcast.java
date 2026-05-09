@@ -168,7 +168,6 @@ public class FirstScreenBroadcast {
 
     private static void printList(String packageInstaller, String label, Set<String> packages) {
         for (String pkg : packages) {
-            Log.d(TAG, packageInstaller + ":" + label + ":" + pkg);
         }
     }
 

@@ -301,21 +301,16 @@ public class InvariantDeviceProfile implements OnSharedPreferenceChangeListener 
      * Reinitialize the current grid after a restore, where some grids might now be disabled.
      */
     public void reinitializeAfterRestore(Context context) {
-        FileLog.d(TAG, "Reinitializing grid after restore");
         String currentGridName = getCurrentGridName(context);
         String currentDbFile = dbFile;
         String newGridName = initGrid(context, currentGridName);
         String newDbFile = dbFile;
         if (!newDbFile.equals(currentDbFile)) {
-            FileLog.d(TAG, "Restored grid is disabled : " + currentGridName
-                    + ", migrating to: " + newGridName
-                    + ", removing all other grid db files");
             for (String gridDbFile : LauncherFiles.GRID_DB_FILES) {
                 if (gridDbFile.equals(currentDbFile)) {
                     continue;
                 }
                 if (context.getDatabasePath(gridDbFile).delete()) {
-                    FileLog.d(TAG, "Removed old grid db file: " + gridDbFile);
                 }
             }
             setCurrentGrid(context, newGridName);

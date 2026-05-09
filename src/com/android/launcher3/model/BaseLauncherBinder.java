@@ -210,7 +210,6 @@ public abstract class BaseLauncherBinder {
     protected void executeCallbacksTask(CallbackTask task, Executor executor) {
         executor.execute(() -> {
             if (mMyBindingId != mBgDataModel.lastBindId) {
-                Log.d(TAG, "Too many consecutive reloads, skipping obsolete data-bind");
                 return;
             }
             for (Callbacks cb : mCallbacksList) {
@@ -350,7 +349,6 @@ public abstract class BaseLauncherBinder {
         protected void executeCallbacksTask(CallbackTask task, Executor executor) {
             executor.execute(() -> {
                 if (mMyBindingId != mBgDataModel.lastBindId) {
-                    Log.d(TAG, "Too many consecutive reloads, skipping obsolete data-bind");
                     return;
                 }
                 task.execute(mCallbacks);

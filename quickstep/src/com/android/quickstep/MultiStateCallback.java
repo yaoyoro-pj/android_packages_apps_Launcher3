@@ -83,8 +83,6 @@ public class MultiStateCallback {
      */
     public void setState(int stateFlag) {
         if (DEBUG_STATES) {
-            Log.d(TAG, "[" + System.identityHashCode(this) + "] Adding "
-                    + convertToFlagNames(stateFlag) + " to " + convertToFlagNames(mState));
         }
         trackGestureEvents(stateFlag);
         final int oldState = mState;
@@ -130,8 +128,6 @@ public class MultiStateCallback {
      */
     public void clearState(int stateFlag) {
         if (DEBUG_STATES) {
-            Log.d(TAG, "[" + System.identityHashCode(this) + "] Removing "
-                    + convertToFlagNames(stateFlag) + " from " + convertToFlagNames(mState));
         }
 
         int oldState = mState;

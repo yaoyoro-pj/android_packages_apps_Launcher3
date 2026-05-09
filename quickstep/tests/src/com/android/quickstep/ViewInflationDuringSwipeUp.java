@@ -272,7 +272,6 @@ public class ViewInflationDuringSwipeUp extends AbstractQuickStepTest {
             if (found) {
                 viewInitCount++;
                 if (log) {
-                    Log.d("InitTracker", "New view inflated", ex);
                 }
 
             }

@@ -363,7 +363,6 @@ public class LoaderTask implements Runnable {
 
         ModelDbController dbController = mApp.getModel().getModelDbController();
         dbController.tryMigrateDB();
-        Log.d(TAG, "loadWorkspace: loading default favorites");
         dbController.loadDefaultFavoritesIfNecessary();
 
         synchronized (mBgDataModel) {
@@ -373,8 +372,6 @@ public class LoaderTask implements Runnable {
             final HashMap<PackageUserKey, SessionInfo> installingPkgs =
                     mSessionHelper.getActiveSessions();
             installingPkgs.forEach(mApp.getIconCache()::updateSessionCache);
-            FileLog.d(TAG, "loadWorkspace: Packages with active install sessions: "
-                    + installingPkgs.values());
 
             final PackageUserKey tempPackageKey = new PackageUserKey(null, null);
             mFirstScreenBroadcast = new FirstScreenBroadcast(installingPkgs);
@@ -548,7 +545,6 @@ public class LoaderTask implements Runnable {
                         if (c.restoreFlag != 0) {
                             // Package is not yet available but might be
                             // installed later.
-                            FileLog.d(TAG, "package not yet restored: " + targetPkg);
 
                             tempPackageKey.update(targetPkg, c.user);
                             if (c.hasRestoreFlag(WorkspaceItemInfo.FLAG_RESTORE_STARTED)) {
@@ -570,7 +566,6 @@ public class LoaderTask implements Runnable {
                         } else if (!isSdCardReady) {
                             // SdCard is not ready yet. Package might get available,
                             // once it is ready.
-                            Log.d(TAG, "Missing pkg, will check later: " + targetPkg);
                             mPendingPackages.add(new PackageUserKey(targetPkg, c.user));
                             // Add the icon on the workspace anyway.
                             allowMissingTarget = true;
@@ -814,11 +809,6 @@ public class LoaderTask implements Runnable {
                         if (widgetProviderInfo != null
                                 && (appWidgetInfo.spanX < widgetProviderInfo.minSpanX
                                 || appWidgetInfo.spanY < widgetProviderInfo.minSpanY)) {
-                            FileLog.d(TAG, "Widget " + widgetProviderInfo.getComponent()
-                                    + " minSizes not meet: span=" + appWidgetInfo.spanX
-                                    + "x" + appWidgetInfo.spanY + " minSpan="
-                                    + widgetProviderInfo.minSpanX + "x"
-                                    + widgetProviderInfo.minSpanY);
                             logWidgetInfo(mApp.getInvariantDeviceProfile(),
                                     widgetProviderInfo);
                         }
@@ -1043,13 +1033,6 @@ public class LoaderTask implements Runnable {
         Point cellSize = new Point();
         for (DeviceProfile deviceProfile : idp.supportedProfiles) {
             deviceProfile.getCellSize(cellSize);
-            FileLog.d(TAG, "DeviceProfile available width: " + deviceProfile.availableWidthPx
-                    + ", available height: " + deviceProfile.availableHeightPx
-                    + ", cellLayoutBorderSpacePx Horizontal: "
-                    + deviceProfile.cellLayoutBorderSpacePx.x
-                    + ", cellLayoutBorderSpacePx Vertical: "
-                    + deviceProfile.cellLayoutBorderSpacePx.y
-                    + ", cellSize: " + cellSize);
         }
 
         StringBuilder widgetDimension = new StringBuilder();
@@ -1080,7 +1063,6 @@ public class LoaderTask implements Runnable {
                     .append(widgetProviderInfo.maxResizeHeight)
                     .append("\n");
         }
-        FileLog.d(TAG, widgetDimension.toString());
     }
 
     private static void logASplit(String label) {

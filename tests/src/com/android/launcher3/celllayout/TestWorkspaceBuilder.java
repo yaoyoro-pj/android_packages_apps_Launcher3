@@ -73,7 +73,6 @@ public class TestWorkspaceBuilder {
                             new CellLayoutBoard.WidgetRect(CellLayoutBoard.CellType.IGNORE,
                                     new Rect(x, y, x, y)), screenId));
                 } catch (Exception e) {
-                    Log.d(TAG, "Unable to place filling widget at " + x + "," + y);
                 }
             }
         }

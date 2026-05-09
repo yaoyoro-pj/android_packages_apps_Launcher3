@@ -58,12 +58,10 @@ public final class FileLog {
     }
 
     public static void d(String tag, String msg, Exception e) {
-        Log.d(tag, msg, e);
         print(tag, msg, e);
     }
 
     public static void d(String tag, String msg) {
-        Log.d(tag, msg);
         print(tag, msg);
     }
 

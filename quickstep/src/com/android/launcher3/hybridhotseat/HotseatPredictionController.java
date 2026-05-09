@@ -226,7 +226,6 @@ public class HotseatPredictionController implements DragController.DragListener,
             WorkspaceItemInfo predictedItem =
                     (WorkspaceItemInfo) mPredictedItems.get(predictionIndex++);
             if (child != null) {
-                Log.d(TAG, "Predicted item is enabled: " + child.isEnabled());
             }
 
             if (isPredictedIcon(child) && child.isEnabled()) {
@@ -287,7 +286,6 @@ public class HotseatPredictionController implements DragController.DragListener,
      * start and pauses predicted apps update on the hotseat
      */
     public void setPauseUIUpdate(boolean paused) {
-        Log.d(TAG, "setPauseUIUpdate parameter `paused` is " + paused);
         mPauseFlags = paused
                 ? (mPauseFlags | FLAG_UPDATE_PAUSED)
                 : (mPauseFlags & ~FLAG_UPDATE_PAUSED);

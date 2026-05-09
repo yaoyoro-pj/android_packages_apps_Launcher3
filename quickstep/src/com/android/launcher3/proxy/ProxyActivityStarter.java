@@ -41,7 +41,6 @@ public class ProxyActivityStarter extends Activity {
 
         mParams = getIntent().getParcelableExtra(EXTRA_PARAMS);
         if (mParams == null) {
-            Log.d(TAG, "Proxy activity started without params");
             finishAndRemoveTask();
             return;
         }

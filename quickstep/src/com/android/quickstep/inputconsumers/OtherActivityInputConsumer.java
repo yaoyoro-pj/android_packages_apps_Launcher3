@@ -379,9 +379,6 @@ public class OtherActivityInputConsumer extends ContextWrapper implements InputC
                 if (DEBUG_FAILED_QUICKSWITCH && !mPassedWindowMoveSlop) {
                     float displacementX = mLastPos.x - mDownPos.x;
                     float displacementY = mLastPos.y - mDownPos.y;
-                    Log.d("Quickswitch", "mPassedWindowMoveSlop=false"
-                            + " disp=" + squaredHypot(displacementX, displacementY)
-                            + " slop=" + mSquaredTouchSlop);
                 }
                 finishTouchTracking(ev);
                 break;

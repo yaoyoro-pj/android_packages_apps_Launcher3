@@ -294,11 +294,6 @@ public class ModelWriter {
     public void deleteItemsFromDatabase(final Collection<? extends ItemInfo> items,
             @Nullable final String reason) {
         ModelVerifier verifier = new ModelVerifier();
-        FileLog.d(TAG, "removing items from db " + items.stream().map(
-                (item) -> item.getTargetComponent() == null ? ""
-                        : item.getTargetComponent().getPackageName()).collect(
-                Collectors.joining(","))
-                + ". Reason: [" + (TextUtils.isEmpty(reason) ? "unknown" : reason) + "]");
         notifyDelete(items);
         enqueueDeleteRunnable(newModelTask(() -> {
             for (ItemInfo item : items) {
@@ -512,7 +507,6 @@ public class ModelWriter {
         @Override
         public final void run() {
             if (mLoadId != mModel.getLastLoadId()) {
-                Log.d(TAG, "Model changed before the task could execute");
                 return;
             }
             runImpl();

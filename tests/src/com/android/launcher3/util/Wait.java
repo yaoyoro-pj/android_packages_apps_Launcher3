@@ -31,7 +31,6 @@ public class Wait {
             LauncherInstrumentation launcher) {
         final long startTime = SystemClock.uptimeMillis();
         long endTime = startTime + timeout;
-        Log.d("Wait", "atMost: " + startTime + " - " + endTime);
         while (SystemClock.uptimeMillis() < endTime) {
             try {
                 if (condition.isTrue()) {
@@ -51,7 +50,6 @@ public class Wait {
         } catch (Throwable t) {
             throw new RuntimeException(t);
         }
-        Log.d("Wait", "atMost: timed out: " + SystemClock.uptimeMillis());
         launcher.checkForAnomaly(false, false);
         Assert.fail(message.get());
     }

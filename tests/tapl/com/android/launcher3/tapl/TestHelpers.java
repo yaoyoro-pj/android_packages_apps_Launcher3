@@ -162,10 +162,7 @@ public class TestHelpers {
     }
 
     public static <R> R wait(SearchCondition<R> condition, long timeout) {
-        Log.d(TAG,
-                "TestHelpers.wait, condition=" + timeout + ", time=" + SystemClock.uptimeMillis());
         final R result = UiDevice.getInstance(getInstrumentation()).wait(condition, timeout);
-        Log.d(TAG, "TestHelpers.wait, result=" + result + ", time=" + SystemClock.uptimeMillis());
         return result;
     }
 }

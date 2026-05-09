@@ -121,8 +121,6 @@ public final class WidgetSizes {
         options.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, rect.right);
         options.putInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, rect.bottom);
         options.putParcelableArrayList(AppWidgetManager.OPTION_APPWIDGET_SIZES, paddedSizes);
-        Log.d("b/267448330", "provider: " + provider + ", paddedSizes: " + paddedSizes
-                + ", getMinMaxSizes: " + rect);
         return options;
     }
 

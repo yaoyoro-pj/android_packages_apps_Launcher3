@@ -208,7 +208,6 @@ public class DisplayController implements ComponentCallbacks, SafeCloseable {
         }
 
         if (reconfigure) {
-            Log.d(TAG, "Configuration changed, notifying listeners");
             Display display = mDM.getDisplay(DEFAULT_DISPLAY);
             if (display != null) {
                 handleInfoChange(display);
@@ -220,7 +219,6 @@ public class DisplayController implements ComponentCallbacks, SafeCloseable {
     @Override
     @TargetApi(Build.VERSION_CODES.S)
     public final void onConfigurationChanged(Configuration config) {
-        Log.d(TASKBAR_NOT_DESTROYED_TAG, "DisplayController#onConfigurationChanged: " + config);
         Display display = mWindowContext.getDisplay();
         if (config.densityDpi != mInfo.densityDpi
                 || config.fontScale != mInfo.fontScale
