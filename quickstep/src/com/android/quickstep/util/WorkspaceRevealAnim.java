@@ -52,7 +52,7 @@ import com.android.systemui.plugins.ResourceProvider;
 public class WorkspaceRevealAnim {
 
     // Should be used for animations running alongside this WorkspaceRevealAnim.
-    public static final int DURATION_MS = 350;
+    public static final int DURATION_MS = 275;
     private static final FloatProperty<Workspace<?>> WORKSPACE_SCALE_PROPERTY =
             WORKSPACE_SCALE_PROPERTY_FACTORY.get(SCALE_INDEX_REVEAL_ANIM);
 
