@@ -13,4 +13,8 @@
     <string name="custom_seekbar_default_value">by default</string>
     <string name="custom_seekbar_default_value_to_set">Default value: <xliff:g id="v">%s</xliff:g>\nLong tap to set</string>
     <string name="custom_seekbar_default_value_is_set">Default value is set</string>
+
+    <!-- Background opacity -->
+    <string name="drawer_background_opacity_title">App drawer background opacity</string>
+    <string name="recents_background_opacity_title">Recents background opacity</string>
 </resources>
