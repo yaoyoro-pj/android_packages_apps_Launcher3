@@ -196,8 +196,7 @@ public class ActivityAllAppsContainerView<T extends Context & ActivityContext>
         mActivityContext = ActivityContext.lookupContext(context);
         mAllAppsStore = new AllAppsStore<>(mActivityContext);
 
-        mScrimColor = ColorUtils.setAlphaComponent(Themes.getAttrColor(context,
-                R.attr.allAppsScrimColor), Utilities.getAllAppsOpacity(context) * 255 / 100);
+        mScrimColor = Themes.getAttrColor(context, R.attr.allAppsScrimColor);
         mHeaderThreshold = getResources().getDimensionPixelSize(
                 R.dimen.dynamic_grid_cell_border_spacing);
         mHeaderProtectionColor = Themes.getAttrColor(context, R.attr.allappsHeaderProtectionColor);
