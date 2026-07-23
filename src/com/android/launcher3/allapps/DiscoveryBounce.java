@@ -119,7 +119,7 @@ public class DiscoveryBounce extends AbstractFloatingView {
     }
 
     public static void showForHomeIfNeeded(Launcher launcher) {
-        LauncherPrefs.get(launcher).put(HOME_BOUNCE_SEEN, true);
+        LauncherPrefs.get(launcher).put(OnboardingPrefs.HOME_BOUNCE_SEEN, true);
     }
 
     private static void showForHomeIfNeeded(Launcher launcher, boolean withDelay) {
